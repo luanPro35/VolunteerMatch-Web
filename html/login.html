@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Đăng Nhập / Đăng Ký</title>
+    <link rel="stylesheet" href="../css/login.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="Main">
+      <!-- Header -->
+      <header id="header">
+        <div class="logo-container">
+          <a href="../header.html" class="logo-nav">
+            <img src="../assets/logo.jpg" alt="Logo" />
+            Volunteer Match
+          </a>
+        </div>
+        <nav class="menu">
+          <a href="../header.html">Trang chủ</a>
+          <a href="vechungtoi.html">Về chúng tôi</a>
+          <a href="hanhtrinh.html">Hành trình</a>
+          <a href="thamgia.html">Tham gia</a>
+          <a href="lienhe.html">Liên hệ</a>
+          <a href="tinmoi.html">Tin mới</a>
+        </nav>
+        <div class="right-section">
+          <a href="login.html" class="login-btn" id="auth-btn">Đăng nhập</a>
+          <a href="donate.html" class="donate-btn">Hỗ trợ ngay</a>
+        </div>
+        <div class="hamburger">
+          <i class="fas fa-bars"></i>
+        </div>
+      </header>
+
+      <!-- Auth Section -->
+      <section id="auth">
+        <div class="auth-container">
+          <div class="auth-toggle">
+            <button id="login-toggle" class="toggle-btn active">
+              Đăng Nhập
+            </button>
+            <button id="register-toggle" class="toggle-btn">Đăng Ký</button>
+          </div>
+
+          <!-- Login Form -->
+          <div id="login-form" class="auth-form active">
+            <h2 class="form-title">Đăng Nhập</h2>
+            <form
+              id="login-form-element"
+              onsubmit="return validateLoginForm(event)"
+            >
+              <div class="form-group">
+                <label for="login-email">Email *</label>
+                <input
+                  type="email"
+                  id="login-email"
+                  name="email"
+                  placeholder="Nhập email của bạn"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="login-password">Mật Khẩu *</label>
+                <input
+                  type="password"
+                  id="login-password"
+                  name="password"
+                  placeholder="Nhập mật khẩu"
+                  required
+                />
+              </div>
+              <button type="submit" class="auth-btn">Đăng Nhập</button>
+            </form>
+            <div id="login-message" class="form-message"></div>
+          </div>
+
+          <!-- Registration Form -->
+          <div id="register-form" class="auth-form">
+            <h2 class="form-title">Đăng Ký</h2>
+            <form
+              id="register-form-element"
+              onsubmit="return validateRegisterForm(event)"
+            >
+              <div class="form-group">
+                <label for="register-name">Họ và Tên *</label>
+                <input
+                  type="text"
+                  id="register-name"
+                  name="name"
+                  placeholder="Nhập họ và tên"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="register-email">Email *</label>
+                <input
+                  type="email"
+                  id="register-email"
+                  name="email"
+                  placeholder="Nhập email của bạn"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="register-password">Mật Khẩu *</label>
+                <input
+                  type="password"
+                  id="register-password"
+                  name="password"
+                  placeholder="Nhập mật khẩu"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="register-confirm-password"
+                  >Xác Nhận Mật Khẩu *</label
+                >
+                <input
+                  type="password"
+                  id="register-confirm-password"
+                  name="confirm-password"
+                  placeholder="Xác nhận mật khẩu"
+                  required
+                />
+              </div>
+              <button type="submit" class="auth-btn">Đăng Ký</button>
+            </form>
+            <div id="register-message" class="form-message"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Back to Top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="../js/login.js"></script>
+  </body>
+</html>

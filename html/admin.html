@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Quản Trị - Volunteer Match</title>
+    <link rel="stylesheet" href="../css/admin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  </head>
+  <body>
+    <div class="admin-container">
+      <!-- Sidebar Navigation -->
+      <div class="admin-sidebar">
+        <div class="logo-container">
+          <a href="../header.html" class="logo-nav">
+            <img src="../assets/logo.jpg" alt="Logo" />
+            <span>Volunteer Match</span>
+          </a>
+        </div>
+        <nav class="admin-nav">
+          <ul>
+            <li class="active" data-tab="dashboard">
+              <i class="fas fa-tachometer-alt"></i> Tổng quan
+            </li>
+            <li data-tab="users">
+              <i class="fas fa-users"></i> Quản lý người dùng
+            </li>
+            <li data-tab="posts">
+              <i class="fas fa-newspaper"></i> Quản lý bài đăng
+            </li>
+            <li data-tab="customer-chat">
+              <i class="fas fa-comments"></i> Tư vấn khách hàng
+            </li>
+            <li data-tab="tours"><i class="fas fa-plane"></i> Quản lý Tour</li>
+            <li data-tab="settings"><i class="fas fa-cog"></i> Cài đặt</li>
+          </ul>
+        </nav>
+        <div class="admin-logout">
+          <button id="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="admin-content">
+        <!-- Header -->
+        <div class="admin-header">
+          <div class="admin-search">
+            <input type="text" placeholder="Tìm kiếm..." />
+            <button><i class="fas fa-search"></i></button>
+          </div>
+          <div class="admin-user">
+            <span id="admin-name">Admin</span>
+            <img src="../assets/logo.jpg" alt="Admin" class="admin-avatar" />
+          </div>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div class="admin-tab active" id="dashboard-tab">
+          <h2>Tổng quan hệ thống</h2>
+          <div class="dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-icon users">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-info">
+                <h3>Người dùng</h3>
+                <p id="user-count">0</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon posts">
+                <i class="fas fa-newspaper"></i>
+              </div>
+              <div class="stat-info">
+                <h3>Bài đăng</h3>
+                <p id="post-count">0</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon pending">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-info">
+                <h3>Chờ duyệt</h3>
+                <p id="pending-count">0</p>
+              </div>
+            </div>
+          </div>
+          <div class="recent-activity">
+            <h3>Hoạt động gần đây</h3>
+            <div class="activity-list" id="activity-list">
+              <!-- Activity items will be added dynamically -->
+              <p class="empty-message">Chưa có hoạt động nào.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users Tab -->
+        <div class="admin-tab" id="users-tab">
+          <div class="tab-header">
+            <h2>Quản lý người dùng</h2>
+            <button class="add-btn" id="add-user-btn">
+              <i class="fas fa-plus"></i> Thêm người dùng
+            </button>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Họ tên</th>
+                  <th>Email</th>
+                  <th>Ngày tạo</th>
+                  <th>Trạng thái</th>
+                  <th>Vai trò</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="users-table-body">
+                <!-- User rows will be added dynamically -->
+              </tbody>
+            </table>
+            <div class="pagination" id="users-pagination">
+              <!-- Pagination will be added dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Posts Tab -->
+        <div class="admin-tab" id="posts-tab">
+          <div class="tab-header">
+            <h2>Quản lý bài đăng</h2>
+            <div class="filter-container">
+              <select id="post-status-filter">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="pending">Chờ duyệt</option>
+                <option value="approved">Đã duyệt</option>
+                <option value="rejected">Từ chối</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tiêu đề</th>
+                  <th>Người đăng</th>
+                  <th>Ngày đăng</th>
+                  <th>Trạng thái</th>
+                  <th>Thao tác</th>
+                </tr>
+              </thead>
+              <tbody id="posts-table-body">
+                <!-- Post rows will be added dynamically -->
+                <tr>
+                  <td colspan="6" class="empty-message">
+                    Chưa có bài đăng nào.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="pagination" id="posts-pagination">
+              <!-- Pagination will be added dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Chat / Consultation Tab -->
+        <div class="admin-tab" id="customer-chat-tab">
+          <h2>Tư vấn khách hàng</h2>
+          <div class="chat-admin-controls">
+            <button id="toggleOnlineBtnChat" class="admin-chat-btn">
+              <i class="fas fa-power-off"></i> <span>Bật Online</span>
+            </button>
+            <div id="statusTextChat">Trạng thái: Offline</div>
+            <div id="statusDotChat" class="status-dot-chat"></div>
+          </div>
+
+          <div class="admin-chat-layout">
+            <div class="chat-session-list-container">
+              <h3>Danh sách trò chuyện</h3>
+              <div id="chat-session-list">
+                <!-- Danh sách các phiên chat sẽ được render ở đây bởi admin.js -->
+                <!-- Ví dụ một item:
+                <div class="chat-session-item" data-customer-id="123">
+                    <div class="session-customer-name">Tên Khách Hàng (email@example.com)</div>
+                    <div class="session-last-message">Nội dung tin nhắn cuối...</div>
+                    <span class="unread-badge">2</span>
+                </div>
+                -->
+              </div>
+            </div>
+            <div class="chat-messages-area">
+              <h3>Nội dung trò chuyện</h3>
+              <div id="chat-messages-container">
+                <!-- Tin nhắn của khách hàng được chọn sẽ hiển thị ở đây -->
+                <div class="no-messages-admin">
+                  💬 Chọn một khách hàng để xem tin nhắn hoặc bật online để nhận
+                  tin nhắn mới.
+                </div>
+              </div>
+              <div class="admin-reply-area">
+                <textarea
+                  id="replyTextAdmin"
+                  placeholder="Nhập tin nhắn trả lời..."
+                ></textarea>
+                <button id="sendReplyBtnAdmin" class="admin-chat-btn send-btn">
+                  <i class="fas fa-paper-plane"></i> Gửi
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Tour Management Tab -->
+        <div class="admin-tab" id="tours-tab">
+          <div class="tab-header">
+            <h2>Quản lý Đăng ký Tour</h2>
+            <div class="filter-container">
+              <select id="tour-filter" class="tour-filter">
+                <option value="">Tất cả các tour</option>
+                <option value="can-gio">Can Gio Tour</option>
+                <option value="daknong">Dak Nong Tour</option>
+                <option value="mai-chau">Mai Chau Tour</option>
+                <option value="ta-van">Ta Van Tour</option>
+                <option value="tay-nguyen">Tay Nguyen Tour</option>
+                <option value="van-ho">Van Ho Tour</option>
+              </select>
+              <button id="export-excel-btn" class="export-btn">
+                <i class="fas fa-file-excel"></i> Xuất Excel
+              </button>
+            </div>
+          </div>
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Mã Tour</th>
+                  <th>Tên khách hàng</th>
+                  <th>Ngày sinh</th>
+                  <th>Số điện thoại</th>
+                  <th>CMND/CCCD</th>
+                  <th>Email</th>
+                  <th>Tên Tour</th>
+                  <th>Ngày khởi hành</th>
+                  <th>Ngày đăng ký</th>
+                  <th>Giờ đăng ký</th>
+                </tr>
+              </thead>
+              <tbody id="tours-table-body">
+                <!-- Tour registration rows will be added dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div class="admin-tab" id="settings-tab">
+          <h2>Cài đặt hệ thống</h2>
+          <div class="settings-container">
+            <div class="settings-card">
+              <h3>Thông tin tài khoản</h3>
+              <form id="admin-profile-form">
+                <div class="form-group">
+                  <label for="admin-profile-name">Họ tên</label>
+                  <input type="text" id="admin-profile-name" name="name" />
+                </div>
+                <div class="form-group">
+                  <label for="admin-profile-email">Email</label>
+                  <input
+                    type="email"
+                    id="admin-profile-email"
+                    name="email"
+                    readonly
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="admin-profile-password">Mật khẩu mới</label>
+                  <input
+                    type="password"
+                    id="admin-profile-password"
+                    name="password"
+                    placeholder="Để trống nếu không thay đổi"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="admin-profile-confirm-password"
+                    >Xác nhận mật khẩu</label
+                  >
+                  <input
+                    type="password"
+                    id="admin-profile-confirm-password"
+                    name="confirmPassword"
+                  />
+                </div>
+                <button type="submit" class="save-btn">
+                  <i class="fas fa-save"></i> Lưu thay đổi
+                </button>
+              </form>
+            </div>
+            <div class="settings-card">
+              <h3>Cài đặt hệ thống</h3>
+              <form id="system-settings-form">
+                <div class="form-group">
+                  <label for="items-per-page">Số mục hiển thị mỗi trang</label>
+                  <input
+                    type="number"
+                    id="items-per-page"
+                    name="itemsPerPage"
+                    min="5"
+                    max="50"
+                    value="10"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="auto-approve-posts">Tự động duyệt bài đăng</label>
+                  <div class="toggle-switch">
+                    <input
+                      type="checkbox"
+                      id="auto-approve-posts"
+                      name="autoApprovePosts"
+                    />
+                    <label for="auto-approve-posts"></label>
+                  </div>
+                </div>
+                <button type="submit" class="save-btn">
+                  <i class="fas fa-save"></i> Lưu cài đặt
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Add/Edit User Modal -->
+    <div class="modal" id="user-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="user-modal-title">Thêm người dùng mới</h3>
+          <button class="close-btn" id="close-user-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="user-form">
+            <input type="hidden" id="user-id" name="id" />
+            <div class="form-group">
+              <label for="user-name">Họ tên *</label>
+              <input type="text" id="user-name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="user-email">Email *</label>
+              <input type="email" id="user-email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="user-password">Mật khẩu *</label>
+              <input type="password" id="user-password" name="password" />
+              <small>Để trống nếu không thay đổi (khi chỉnh sửa)</small>
+            </div>
+            <div class="form-group">
+              <label for="user-status">Trạng thái</label>
+              <select id="user-status" name="status">
+                <option value="active">Hoạt động</option>
+                <option value="inactive">Không hoạt động</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="user-role">Vai trò</label>
+              <select id="user-role" name="role">
+                <option value="user">Người dùng</option>
+                <option value="admin">Quản trị viên</option>
+              </select>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="cancel-btn" id="cancel-user-form">
+                Hủy bỏ
+              </button>
+              <button type="submit" class="save-btn">
+                <i class="fas fa-save"></i> Lưu
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Post Modal -->
+    <div class="modal" id="post-modal">
+      <div class="modal-content large-modal">
+        <div class="modal-header">
+          <h3 id="post-modal-title">Chi tiết bài đăng</h3>
+          <button class="close-btn" id="close-post-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="post-details">
+            <div class="post-info">
+              <h4 id="post-title"></h4>
+              <div class="post-meta">
+                <span id="post-author"></span> |
+                <span id="post-date"></span>
+              </div>
+            </div>
+            <div class="post-content" id="post-content"></div>
+          </div>
+          <div class="post-actions">
+            <button class="reject-btn" id="reject-post-btn">
+              <i class="fas fa-times"></i> Từ chối
+            </button>
+            <button class="approve-btn" id="approve-post-btn">
+              <i class="fas fa-check"></i> Duyệt bài
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirm-modal">
+      <div class="modal-content small-modal">
+        <div class="modal-header">
+          <h3 id="confirm-modal-title">Xác nhận</h3>
+          <button class="close-btn" id="close-confirm-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="confirm-modal-message">
+            Bạn có chắc chắn muốn thực hiện hành động này?
+          </p>
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" id="cancel-confirm">
+              Hủy bỏ
+            </button>
+            <button type="button" class="confirm-btn" id="confirm-action">
+              Xác nhận
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../js/admin.js"></script>
+  </body>
+</html>

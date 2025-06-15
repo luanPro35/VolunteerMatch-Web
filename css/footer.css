@@ -1,0 +1,276 @@
+/* Base styles */
+.footer-container {
+    width: 100%;
+    background: linear-gradient(120deg, #2b5876 0%, #4e4376 100%);
+    color: #fff;
+    padding: 40px 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    box-shadow: 0 -2px 24px rgba(46, 54, 80, 0.15);
+}
+
+#footer {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 40px;
+    padding: 0 30px;
+}
+
+/* Card First Styles */
+.card-first {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 2px 12px rgba(60, 60, 90, 0.06);
+}
+
+.logo-text {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.logo-text img {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    border: 2px solid #fff;
+}
+
+.logo-text h2 {
+    color: #ffeb3b;
+    font-size: 18px;
+    margin: 0;
+}
+
+.text-footer h3 {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+/* Link Footer */
+.link-footer {
+    margin: 20px 0;
+}
+
+.link-footer h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #6a9dd9;
+}
+
+.link-footer a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    margin-right: 10px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.link-footer a:hover {
+    background: #6a9dd9;
+    transform: translateY(-3px);
+}
+
+/* Introduction Section */
+.introduction {
+    margin-top: 20px;
+}
+
+.introduction a,
+.introduction h3,
+.introduction p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 12px;
+}
+
+.introduction p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.introduction p a {
+    margin: 0;
+    padding: 0;
+    line-height: normal;
+    vertical-align: baseline;
+}
+
+.introduction i {
+    color: #6a9dd9;
+    width: 20px;
+}
+
+/* Card Second Styles */
+.card-second {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 32px 28px;
+}
+
+.card-second h3 {
+    color: #6a9dd9;
+    margin-bottom: 20px;
+}
+
+.card-second ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card-second li {
+    margin-bottom: 12px;
+}
+
+.card-second a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.card-second a:hover {
+    color: #6a9dd9;
+    transform: translateX(5px);
+}
+
+/* Card Third Styles */
+.card-third {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 32px 28px;
+}
+
+.card-third h3 {
+    color: #6a9dd9;
+    margin-bottom: 20px;
+}
+
+.card-third p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.policy-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.policy-links li {
+    margin-bottom: 12px;
+}
+
+.policy-links a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.policy-links a i {
+    color: #6a9dd9;
+}
+
+.policy-links a:hover {
+    color: #6a9dd9;
+    transform: translateX(5px);
+}
+
+/* Icon Animation Styles */
+.card-second a i,
+.card-third .policy-links a i {
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.card-second a:hover i {
+    transform: translateX(5px) rotate(360deg);
+    color: #6a9dd9;
+}
+
+.card-third .policy-links a:hover i {
+    transform: scale(1.2) rotate(15deg);
+    color: #6a9dd9;
+}
+
+/* Optional: Add animation for initial load */
+@keyframes iconWiggle {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-10deg);
+    }
+
+    75% {
+        transform: rotate(10deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.card-second a i,
+.card-third .policy-links a i {
+    animation: iconWiggle 1s ease;
+}
+
+/* Media Queries */
+@media (max-width: 1024px) {
+    #footer {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    #footer {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .card-first,
+    .card-second,
+    .card-third {
+        padding: 25px 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .logo-text h2 {
+        font-size: 16px;
+    }
+
+    .text-footer h3,
+    .card-second h3,
+    .card-third h3 {
+        font-size: 16px;
+    }
+}

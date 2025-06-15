@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="./assets/logo.jpg" />
+    <title>Volunteer Airplane Animation with Video and Nav</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome for Hamburger Icon -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      /* Reset & base */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Roboto, sans-serif;
+      }
+
+      :root {
+        --primary-nav-color: #1976d2; /* Deep blue for header */
+        --primary-nav-hover: #1565c0; /* Darker blue for hover */
+      }
+
+      /* Header (nav) */
+      #header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+      #header.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-nav {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-nav-color);
+        text-decoration: none;
+      }
+
+      .logo-nav img {
+        height: 60px;
+        margin-right: 10px;
+        border-radius: 40px;
+      }
+
+      .menu a {
+        margin: 0 25px;
+        text-decoration: none;
+        color: #666;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+
+      .menu a:hover {
+        color: var(--primary-nav-color);
+      }
+
+      .right-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .login-btn {
+        background: transparent;
+        border: 2px solid var(--primary-nav-color);
+        color: var(--primary-nav-color);
+        padding: 6px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s;
+      }
+
+      .login-btn:hover {
+        background: var(--primary-nav-color);
+        color: white;
+      }
+
+      .donate-btn {
+        background: var(--primary-nav-color);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background 0.3s;
+      }
+
+      .donate-btn:hover {
+        background: var(--primary-nav-hover);
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+      }
+
+      .hamburger i {
+        font-size: 24px;
+        color: #666;
+      }
+
+      /* Body & Background */
+      body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
+
+      /* Clouds */
+      .cloud {
+        position: absolute;
+        background: #fff;
+        background: linear-gradient(to bottom, #fff 5%, #f1f1f1 100%);
+        border-radius: 100px;
+        box-shadow: 20px 10px 15px rgba(0, 0, 0, 0.1);
+        opacity: 0.8;
+        animation: cloudMove linear infinite;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+        z-index: 50;
+      }
+      .cloud1 {
+        width: 150px;
+        height: 80px;
+        top: 15vh;
+        left: -200px;
+        animation-duration: 60s;
+      }
+      .cloud2 {
+        width: 100px;
+        height: 60px;
+        top: 30vh;
+        left: -150px;
+        animation-duration: 45s;
+        animation-delay: 10s;
+      }
+      .cloud3 {
+        width: 120px;
+        height: 70px;
+        top: 50vh;
+        left: -180px;
+        animation-duration: 50s;
+        animation-delay: 20s;
+      }
+
+      @keyframes cloudMove {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(130vw);
+        }
+      }
+
+      /* Airplane */
+      .airplane {
+        position: absolute;
+        width: 900px;
+        height: auto;
+        animation: flyDiagonal 12s linear 1 forwards;
+        z-index: 100;
+        filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5));
+      }
+
+      @keyframes flyDiagonal {
+        0% {
+          transform: translateX(-100vw) translateY(10vh) rotate(10deg);
+          opacity: 0;
+        }
+        15% {
+          transform: translateX(-70vw) translateY(5vh) rotate(8deg);
+          opacity: 1;
+        }
+        30% {
+          transform: translateX(-40vw) translateY(12vh) rotate(7deg);
+          opacity: 1;
+        }
+        45% {
+          transform: translateX(-10vw) translateY(8vh) rotate(3deg);
+          opacity: 1;
+        }
+        60% {
+          transform: translateX(20vw) translateY(14vh) rotate(-2deg);
+          opacity: 1;
+        }
+        75% {
+          transform: translateX(50vw) translateY(7vh) rotate(-5deg);
+          opacity: 1;
+        }
+        90% {
+          transform: translateX(80vw) translateY(12vh) rotate(-10deg);
+          opacity: 1;
+        }
+        100% {
+          transform: translateX(120vw) translateY(5vh) rotate(-15deg);
+          opacity: 0;
+        }
+      }
+
+      /* Sound button */
+      .sound-control {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px 25px;
+        cursor: pointer;
+        background-color: #ff6b6b;
+        border: none;
+        border-radius: 30px;
+        font-weight: bold;
+        z-index: 110;
+        transition: background-color 0.3s ease;
+        font-size: 18px;
+        user-select: none;
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 4px 8px rgba(255, 107, 107, 0.4);
+      }
+
+      .sound-control:hover {
+        background-color: #ff4757;
+      }
+
+      .sound-control .heart-icon {
+        width: 18px;
+        height: 18px;
+        background: url("https://cdn-icons-png.flaticon.com/512/833/833472.png")
+          no-repeat center/contain;
+      }
+
+      /* Volunteer text */
+      .volunteer-text {
+        position: absolute;
+        bottom: 15vh;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 4rem;
+        font-weight: 900;
+        color: #2c3e50;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+          0 0 20px rgba(46, 204, 113, 0.7), 0 0 30px rgba(46, 204, 113, 0.5);
+        opacity: 0;
+        transition: opacity 1s ease;
+        z-index: 120;
+        user-select: none;
+        pointer-events: none;
+      }
+      .volunteer-text.visible {
+        opacity: 1;
+      }
+
+      /* Video */
+      #volunteerVideo {
+        position: absolute;
+        bottom: 5vh;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 130;
+        max-width: 90vw;
+        height: auto;
+        max-height: 70vh;
+        opacity: 0;
+        transition: opacity 1s ease;
+        display: none;
+        border-radius: 12px;
+        box-shadow: 0 0 24px rgba(0, 0, 0, 0.4);
+        object-fit: contain;
+      }
+      #volunteerVideo.visible {
+        display: block;
+        opacity: 1;
+      }
+
+      /* Desktop styles (screens larger than 1024px) */
+      @media (min-width: 1025px) {
+        #volunteerVideo {
+          max-width: 90vw;
+          max-height: 70vh;
+          border-radius: 12px;
+        }
+        .volunteer-text {
+          font-size: 4rem;
+          bottom: 15vh;
+        }
+      }
+
+      /* Laptop styles (screens up to 1024px) */
+      @media (max-width: 1024px) {
+        #volunteerVideo {
+          max-width: 85vw;
+          max-height: 60vh;
+          border-radius: 10px;
+        }
+        .volunteer-text {
+          font-size: 3rem;
+          bottom: 18vh;
+        }
+      }
+
+      /* Mobile styles (screens up to 768px) */
+      @media (max-width: 768px) {
+        #header {
+          flex-wrap: wrap;
+          padding: 10px 15px;
+        }
+        .logo-container {
+          flex: 1;
+        }
+        .menu {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          background: #ffffff;
+          position: absolute;
+          top: 90px;
+          left: 0;
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        .menu.active {
+          display: flex;
+        }
+        .menu a {
+          margin: 10px 0;
+          text-align: center;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .hamburger {
+          display: block;
+        }
+        .right-section {
+          margin-top: 10px;
+        }
+        .auth-container {
+          padding: 20px;
+        }
+        .slogan,
+        .impact {
+          display: none;
+        }
+        #volunteerVideo {
+          max-width: 95vw;
+          max-height: 50vh;
+          border-radius: 8px;
+          margin-bottom: 70px;
+        }
+        .volunteer-text {
+          font-size: 2rem;
+          bottom: 22vh;
+        }
+      }
+
+      /* Heart float */
+      .heart-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 40px;
+        height: 40px;
+        background: url("https://cdn-icons-png.flaticon.com/512/833/833472.png")
+          no-repeat center/contain;
+        animation: floatUp 4s linear infinite;
+        opacity: 0.8;
+        cursor: pointer;
+        z-index: 200;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0.8;
+        }
+        50% {
+          opacity: 1;
+          scale: 1.1;
+        }
+        100% {
+          transform: translateY(-150px) scale(0.8);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Nav -->
+    <header id="header">
+      <div class="logo-container">
+        <a href="header.html" class="logo-nav">
+          <img src="./assets/logo.jpg" alt="Logo" />
+          Volunteer Match
+        </a>
+      </div>
+      <nav class="menu">
+        <a href="header.html">Trang chủ</a>
+        <a href="./html/vechungtoi.html">Về chúng tôi</a>
+        <a href="./html/hanhtrinh.html">Hành trình</a>
+        <a href="./html/thamgia.html">Tham gia</a>
+        <a href="./html/lienhe.html">Liên hệ</a>
+        <a href="./html/tinmoi.html">Tin mới</a>
+      </nav>
+      <div class="right-section">
+        <a href="./html/login.html" class="login-btn" id="auth-btn"
+          >Đăng nhập</a
+        >
+        <a href="./html/donate.html" class="donate-btn">Hỗ trợ ngay</a>
+      </div>
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>
+
+    <!-- Clouds -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
+
+    <!-- Airplane -->
+    <img src="../assets/airplane.png" alt="Airplane" class="airplane" />
+
+    <!-- Volunteer Text -->
+    <div class="volunteer-text">Volunteer Match</div>
+
+    <!-- Video -->
+    <video id="volunteerVideo" controls preload="auto">
+      <source
+        src="./video/copy_3A89381C-0A65-4580-956A-03AF79733A8A.MP4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Audio -->
+    <audio
+      id="airplaneSound"
+      src="./sounds/Am_thanh_tieng_may_bay_o_san_bay-www_tiengdong_com.mp3"
+      preload="auto"
+    ></audio>
+
+    <!-- Sound Button -->
+    <button class="sound-control" id="soundBtn">
+      <span class="heart-icon"></span> ▶
+    </button>
+
+    <!-- Heart float -->
+    <div class="heart-float" title="Thank you for volunteering!"></div>
+
+    <script>
+      const header = document.getElementById("header");
+      const airplane = document.querySelector(".airplane");
+      const audio = document.getElementById("airplaneSound");
+      const soundBtn = document.getElementById("soundBtn");
+      const volunteerText = document.querySelector(".volunteer-text");
+      const volunteerVideo = document.getElementById("volunteerVideo");
+      let isPlaying = false;
+
+      // Tự động phát âm thanh khi trang load (nếu trình duyệt cho phép)
+      window.addEventListener("load", () => {
+        audio
+          .play()
+          .then(() => {
+            isPlaying = true;
+            soundBtn.innerHTML = '<span class="heart-icon"></span> ⏸';
+          })
+          .catch((error) => {
+            console.log("Autoplay bị chặn:", error);
+            isPlaying = false;
+            soundBtn.innerHTML = '<span class="heart-icon"></span> ▶';
+          });
+      });
+
+      // Nút bật/tắt âm thanh
+      soundBtn.addEventListener("click", () => {
+        if (isPlaying) {
+          audio.pause();
+          isPlaying = false;
+          soundBtn.innerHTML = '<span class="heart-icon"></span> ▶';
+        } else {
+          audio
+            .play()
+            .then(() => {
+              isPlaying = true;
+              soundBtn.innerHTML = '<span class="heart-icon"></span> ⏸';
+            })
+            .catch((error) => {
+              console.log("Error playing audio:", error);
+              isPlaying = false;
+              soundBtn.innerHTML = '<span class="heart-icon"></span> ▶';
+            });
+        }
+      });
+
+      // Khi animation bắt đầu, nếu âm thanh đang bật và audio đang dừng thì phát lại
+      airplane.addEventListener("animationstart", () => {
+        if (isPlaying && audio.paused) {
+          audio.play().catch((error) => {
+            console.log("Error playing audio:", error);
+          });
+        }
+      });
+
+      // Khi animation kết thúc, dừng âm thanh, hiện chữ, video và header
+      airplane.addEventListener("animationend", () => {
+        audio.pause();
+        audio.currentTime = 0;
+        isPlaying = false;
+        soundBtn.innerHTML = '<span class="heart-icon"></span> ▶';
+
+        // Hiện volunteer text
+        volunteerText.classList.add("visible");
+
+        // Hiện header
+        header.classList.add("visible");
+
+        // Hiện video
+        setTimeout(() => {
+          volunteerVideo.classList.add("visible");
+          volunteerVideo.play().catch((err) => {
+            console.log("Video autoplay bị chặn:", err);
+          });
+        }, 1000);
+      });
+
+      // Kiểm tra lỗi video
+      volunteerVideo.addEventListener("error", (e) => {
+        console.log("Lỗi khi tải video:", e);
+      });
+
+      // Dừng âm thanh khi reload hoặc thoát trang
+      window.addEventListener("beforeunload", () => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+
+      // Hamburger menu toggle
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.querySelector(".hamburger");
+        const menu = document.querySelector(".menu");
+
+        hamburger.addEventListener("click", function (e) {
+          e.stopPropagation();
+          menu.classList.toggle("active");
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener("click", function (e) {
+          if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+            menu.classList.remove("active");
+          }
+        });
+
+        // Close menu when clicking a menu item
+        menu.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            menu.classList.remove("active");
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

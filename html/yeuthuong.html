@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Trang Tìm Kiếm và Hiển Thị QR Code</title>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Roboto, sans-serif;
+      }
+
+      :root {
+        --primary-nav-color: #1976d2; /* Deep blue for header */
+        --primary-nav-hover: #1565c0; /* Darker blue for hover */
+        --primary-color: #42a5f5; /* Soft blue for body */
+        --primary-hover: #000000; /* Black for body hover */
+        --light-blue: #e3f2fd; /* Very light blue */
+        --mid-blue: #bbdefb; /* Mid-tone blue */
+        --text-dark: #333;
+        --text-light: #ffffff;
+        --background: #e3f2fd;
+        --card-bg: #ffffff;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --glow: 0 0 10px rgba(66, 165, 245, 0.4);
+      }
+
+      body {
+        background: var(--background);
+        color: var(--text-dark);
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+        margin-top: -60px;
+      }
+
+      /* Header Styles (Updated Colors) */
+      /* Các class liên quan đến header không được sử dụng trong trang này */
+      #header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background: #ffffff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 10;
+        margin-left: -20px;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo-nav {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--primary-nav-color);
+        text-decoration: none;
+      }
+
+      .logo-nav img {
+        height: 60px;
+        margin-right: 10px;
+        border-radius: 40px;
+      }
+
+      .slogan {
+        font-size: 14px;
+        color: #666;
+        margin-left: 10px;
+        font-style: italic;
+      }
+
+      .impact {
+        display: flex;
+        align-items: center;
+        color: var(--primary-nav-color);
+        font-size: 14px;
+        margin-left: 20px;
+      }
+
+      .impact::before {
+        content: "♥";
+        margin-right: 5px;
+        color: var(--primary-nav-color);
+      }
+
+      .menu a {
+        margin: 0 25px;
+        text-decoration: none;
+        color: #666;
+        font-size: 16px;
+        transition: color 0.3s;
+      }
+
+      .menu a:hover {
+        color: var(--primary-nav-color);
+      }
+
+      .right-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .language {
+        font-size: 20px;
+        cursor: pointer;
+        color: #666;
+        transition: color 0.3s;
+      }
+
+      .language:hover {
+        color: var(--primary-nav-color);
+      }
+
+      .login-btn {
+        background: transparent;
+        border: 2px solid var(--primary-nav-color);
+        color: var(--primary-nav-color);
+        padding: 6px 15px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: all 0.3s;
+      }
+
+      .login-btn:hover {
+        background: var(--primary-nav-color);
+        color: white;
+      }
+
+      .donate-btn {
+        background: var(--primary-nav-color);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: background 0.3s;
+      }
+
+      .donate-btn:hover {
+        background: var(--primary-nav-hover);
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+      }
+
+      .hamburger i {
+        font-size: 24px;
+        color: #666;
+      }
+
+      /* Search Section */
+      .search-section {
+        margin: 100px 0 40px;
+        text-align: center;
+        padding: 20px;
+        border-radius: 12px;
+      }
+
+      .search-bar {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .search-bar input {
+        padding: 14px 50px 14px 20px;
+        width: 100%;
+        border: 1px solid var(--mid-blue);
+        border-radius: 50px;
+        font-size: 16px;
+        background: var(--card-bg);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        outline: none;
+        transition: all 0.3s ease;
+      }
+
+      .search-bar input:focus {
+        border-color: var(--primary-color);
+        box-shadow: var(--glow);
+      }
+
+      .search-bar input::placeholder {
+        color: var(--text-dark);
+        opacity: 0.6;
+        font-weight: 400;
+      }
+
+      .search-bar i {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-color);
+        font-size: 18px;
+        transition: all 0.3s ease;
+      }
+
+      .search-bar i:hover {
+        color: var(--primary-hover);
+        animation: pulse 1s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: translateY(-50%) scale(1);
+        }
+        50% {
+          transform: translateY(-50%) scale(1.2);
+        }
+        100% {
+          transform: translateY(-50%) scale(1);
+        }
+      }
+
+      /* QR Grid */
+      .qr-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+        padding: 20px 0;
+      }
+
+      .qr-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        text-align: center;
+        padding: 16px;
+        border: 2px solid transparent;
+        transition: all 0.3s ease;
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      .qr-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        border-color: var(--primary-color);
+        box-shadow: 0 8px 20px rgba(66, 165, 245, 0.2);
+      }
+
+      .qr-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: var(--light-blue);
+        padding: 10px;
+      }
+
+      .qr-card p {
+        margin: 12px 0 0;
+        color: var(--text-dark);
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      /* Nút quay lại trang chủ */
+      .back-to-home {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #3498db;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 25px;
+        text-decoration: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        font-size: 15px;
+        z-index: 999;
+      }
+
+      .back-to-home:hover {
+        background-color: #2980b9;
+        transform: translateY(-3px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .back-to-home i {
+        font-size: 16px;
+      }
+
+      @media (max-width: 768px) {
+        /* Các media queries khác... */
+
+        .back-to-home {
+          padding: 10px 20px;
+          font-size: 14px;
+          bottom: 20px;
+          right: 20px;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        #header {
+          flex-wrap: wrap;
+          padding: 15px;
+        }
+
+        .logo-container {
+          flex: 1;
+          margin-bottom: 10px;
+        }
+
+        .slogan,
+        .impact,
+        .language {
+          display: none;
+        }
+
+        .menu {
+          display: none;
+          flex-direction: column;
+          width: 100%;
+          background: #ffffff;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu.active {
+          display: flex;
+        }
+
+        .menu a {
+          margin: 10px 0;
+          text-align: center;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .right-section {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-right: 50px;
+        }
+
+        .login-btn,
+        .donate-btn {
+          padding: 8px 16px;
+          font-size: 16px;
+          border-radius: 8px;
+          font-weight: 500;
+        }
+
+        .login-btn {
+          border: 2px solid var(--primary-nav-color);
+          min-width: 100px;
+          text-align: center;
+        }
+
+        .donate-btn {
+          background: var(--primary-nav-color);
+          min-width: 110px;
+          text-align: center;
+        }
+
+        .hamburger {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          right: 15px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .search-section {
+          margin: 80px 0 30px;
+          padding: 15px;
+        }
+
+        .search-bar input {
+          padding: 12px 45px 12px 18px;
+          font-size: 15px;
+        }
+
+        .qr-grid {
+          grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+          gap: 16px;
+        }
+
+        .qr-card {
+          padding: 12px;
+        }
+
+        .qr-card img {
+          height: 160px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .qr-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .search-bar input {
+          width: 100%;
+          margin-top: 20px;
+        }
+
+        .qr-card img {
+          height: 140px;
+        }
+
+        .qr-card p {
+          font-size: 14px;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .hamburger {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="search-section">
+        <div class="search-bar">
+          <input type="text" id="searchInput" placeholder="Tìm kiếm mã QR..." />
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+      <div class="qr-grid" id="qrGrid">
+        <!-- QR cards will be added dynamically -->
+      </div>
+    </div>
+
+    <!-- Nút quay lại trang chủ -->
+    <button
+      class="back-to-home"
+      onclick="window.location.href='../header.html'"
+    >
+      <i class="fas fa-home"></i> Quay lại trang chủ
+    </button>
+
+    <script>
+      // Sample QR data
+      const qrData = [
+        { name: "Nghệ An", image: "../assets/NgheAn.png" },
+        { name: "Hà Nội", image: "../assets/hanoi.png" },
+        { name: "Đà Nẵng", image: "../assets/danang.png" },
+        { name: "Hồ Chí Minh", image: "../assets/hochiminh.png" },
+        { name: "Hải Phòng", image: "../assets/haiphong.png" },
+        { name: "Huế", image: "../assets/Huế.png" },
+        { name: "Nha Trang", image: "../assets/khanhhoa.png" },
+        { name: "Cần Thơ", image: "../assets/cantho.png" },
+        { name: "Đà Lạt", image: "../assets/LâmĐồng.png" },
+        { name: "Phú Quốc", image: "../assets/Kiên Giang.png" },
+        { name: "Quảng Ninh", image: "../assets/QuảngNinh.png" },
+        { name: "Bắc Ninh", image: "../assets/bacninh.png" },
+        { name: "Nam Định", image: "../assets/NamĐịnh.png" },
+        { name: "Thái Nguyên", image: "../assets/TháiNguyen.png" },
+        { name: "Hưng Yên", image: "../assets/hungyen.png" },
+        { name: "Bắc Giang", image: "../assets/bacgiang.png" },
+        { name: "Thái Bình", image: "../assets/TháiBinh.png" },
+        { name: "Ninh Bình", image: "../assets/NinhBinh.png" },
+        { name: "Hà Giang", image: "../assets/haugiang.png" },
+        { name: "An Giang", image: "../assets/angiang.png" },
+        { name: "Bà Rịa - Vũng Tàu", image: "../assets/vungtau.png" },
+        { name: "Bạc Liêu", image: "../assets/baclieu.png" },
+        { name: "Bắc Kạn", image: "../assets/backan.png" },
+        { name: "Bến Tre", image: "../assets/bentre.png" },
+        { name: "Bình Dương", image: "../assets/binhduong.png" },
+        { name: "Bình Định", image: "../assets/binhdinh.png" },
+        { name: "Bình Phước", image: "../assets/binhphuoc.png" },
+        { name: "Bình Thuận", image: "../assets/binhthuan.png" },
+        { name: "Cà Mau", image: "../assets/camau.png" },
+        { name: "Cao Bằng", image: "../assets/caobang.png" },
+        { name: "Đắk Lắk", image: "../assets/daklak.png" },
+        { name: "Đắk Nông", image: "../assets/daknong.png" },
+        { name: "Điện Biên", image: "../assets/dienbien.png" },
+        { name: "Đồng Nai", image: "../assets/dongnai.png" },
+        { name: "Đồng Tháp", image: "../assets/dongthap.png" },
+        { name: "Gia Lai", image: "../assets/gialai.png" },
+        { name: "Hà Nam", image: "../assets/hanam.png" },
+        { name: "Hà Tĩnh", image: "../assets/hatinh.png" },
+        { name: "Hải Dương", image: "../assets/haiduong.png" },
+        { name: "Hậu Giang", image: "../assets/haugiang.png" },
+        { name: "Hòa Bình", image: "../assets/hoabinh.png" },
+        { name: "Khánh Hòa", image: "../assets/khanhhoa.png" },
+        { name: "Kiên Giang", image: "../assets/Kiên Giang.png" },
+        { name: "Kon Tum", image: "../assets/KonTum.png" },
+        { name: "Lai Châu", image: "../assets/LaiChau.png" },
+        { name: "Lâm Đồng", image: "../assets/LâmĐồng.png" },
+        { name: "Lạng Sơn", image: "../assets/LangSon.png" },
+        { name: "Lào Cai", image: "../assets/LàoCai.png" },
+        { name: "Long An", image: "../assets/LongAn.png" },
+        { name: "Phú Thọ", image: "../assets/PhuTho.png" },
+        { name: "Quảng Bình", image: "../assets/QuảngBinh.png" },
+        { name: "Quảng Nam", image: "../assets/QuảngNam.png" },
+        { name: "Quảng Ngãi", image: "../assets/QuảngNgai.png" },
+        { name: "Quảng Trị", image: "../assets/QuảngTri.png" },
+        { name: "Sóc Trăng", image: "../assets/SócTrang.png" },
+        { name: "Sơn La", image: "../assets/SơnLa.png" },
+        { name: "Tây Ninh", image: "../assets/TâyNinh.png" },
+        { name: "Thanh Hóa", image: "../assets/ThanhHoa.png" },
+        { name: "Tiền Giang", image: "../assets/TiềnGiang.png" },
+        { name: "Trà Vinh", image: "../assets/TràVinh.png" },
+        { name: "Tuyên Quang", image: "../assets/TuyênQuang.png" },
+        { name: "Vĩnh Long", image: "../assets/VĩnhLong.png" },
+        { name: "Vĩnh Phúc", image: "../assets/VĩnhPhuc.png" },
+        { name: "Yên Bái", image: "../assets/YênBai.png" },
+      ];
+
+      // Function to render QR cards
+      function renderQRCards(data) {
+        const qrGrid = document.getElementById("qrGrid");
+        qrGrid.innerHTML = "";
+        data.forEach((item, index) => {
+          const card = document.createElement("div");
+          card.className = "qr-card";
+          card.style.animationDelay = `${index * 0.1}s`;
+          card.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" onerror="this.src='../assets/fallback.png'; this.alt='Hình ảnh không tải được';">
+            <p>${item.name}</p>
+          `;
+          qrGrid.appendChild(card);
+        });
+      }
+
+      // Initial render
+      renderQRCards(qrData);
+
+      // Search functionality
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", function (e) {
+          const searchTerm = e.target.value.toLowerCase();
+          const filteredData = qrData.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm)
+          );
+          renderQRCards(filteredData);
+        });
+
+      // Hamburger menu toggle
+      document
+        .querySelector(".hamburger")
+        .addEventListener("click", function () {
+          const menu = document.querySelector(".menu");
+          menu.classList.toggle("active");
+        });
+    </script>
+  </body>
+</html>

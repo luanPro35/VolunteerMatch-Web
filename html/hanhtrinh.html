@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Câu Chuyện Thành Công - Hành Trình Thay Đổi</title>
+    <link rel="stylesheet" href="../css/hanhtrinh.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header">
+      <div class="logo-container">
+        <a href="../header.html" class="logo-nav">
+          <img src="../assets/logo.jpg" alt="Logo" />
+          Volunteer Match
+        </a>
+      </div>
+      <nav class="menu">
+        <a href="../header.html">Trang chủ</a>
+        <a href="vechungtoi.html">Về chúng tôi</a>
+        <a href="hanhtrinh.html">Hành trình</a>
+        <a href="thamgia.html">Tham gia</a>
+        <a href="lienhe.html">Liên hệ</a>
+        <a href="tinmoi.html">Tin mới</a>
+      </nav>
+      <div class="right-section">
+        <a href="login.html" class="login-btn" id="auth-btn">Đăng nhập</a>
+        <a href="donate.html" class="donate-btn">Hỗ trợ ngay</a>
+      </div>
+      <div class="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
+    </header>
+
+    <!-- Hidden filter radio buttons -->
+    <input type="radio" name="filter" id="filter-all" checked />
+    <input type="radio" name="filter" id="filter-education" />
+    <input type="radio" name="filter" id="filter-health" />
+    <input type="radio" name="filter" id="filter-housing" />
+
+    <!-- Hidden pagination radio buttons -->
+    <input type="radio" name="page" id="page-1" checked />
+    <input type="radio" name="page" id="page-2" />
+
+    <!-- Modal checkboxes -->
+    <input type="checkbox" id="modal-1" class="modal-trigger" />
+    <input type="checkbox" id="modal-2" class="modal-trigger" />
+    <input type="checkbox" id="modal-3" class="modal-trigger" />
+    <input type="checkbox" id="modal-4" class="modal-trigger" />
+    <input type="checkbox" id="modal-5" class="modal-trigger" />
+    <input type="checkbox" id="modal-6" class="modal-trigger" />
+
+    <!-- Hero Section -->
+    <div class="hero" id="hero">
+      <video autoplay muted loop playsinline class="hero-background">
+        <source src="../video/DenVau.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">HÀNH TRÌNH THAY ĐỔI</h1>
+        <p class="hero-subtitle">
+          Mỗi bước chân, mỗi tấm lòng – cùng nhau, chúng ta viết nên những câu
+          chuyện đổi đời, lan tỏa hy vọng đến mọi cộng đồng.
+        </p>
+        <p class="hero-description">
+          Khám phá những hành trình vượt qua nghịch cảnh, những cộng đồng vươn
+          lên mạnh mẽ, và sức mạnh của sự đoàn kết. Hãy cùng chúng tôi tiếp tục
+          gieo mầm yêu thương, kiến tạo tương lai tươi sáng hơn.
+        </p>
+        <a
+          href="../header.html"
+          class="hero-cta"
+          role="button"
+          aria-label="Khám phá các câu chuyện thay đổi"
+          >Khám Phá Ngay</a
+        >
+      </div>
+    </div>
+
+    <div class="filters">
+      <label for="filter-all">
+        <div class="filter-btn">Tất Cả</div>
+      </label>
+      <label for="filter-education">
+        <div class="filter-btn">Giáo Dục</div>
+      </label>
+      <label for="filter-health">
+        <div class="filter-btn">Y Tế</div>
+      </label>
+      <label for="filter-housing">
+        <div class="filter-btn">Nhà Ở</div>
+      </label>
+    </div>
+
+    <div class="stories-container" id="stories">
+      <!-- Page 1 Content -->
+      <div class="story-card education page-1-content">
+        <div class="story-image"></div>
+        <div class="story-content">
+          <h3 class="story-title">Ánh Sáng Từ Miền Núi</h3>
+          <p class="story-quote">
+            "Chúng tôi chưa từng nghĩ là trẻ có thể học được hơn đến đến"
+          </p>
+          <p class="story-description">
+            Trước kia, bản làng ở thôn thiên sơn sáng và tài liệu học tập, thiết
+            bị giáo dục, trường học được xây mới, trẻ em gọi đây có cơ hội học
+            hành đầy đủ.
+          </p>
+          <label for="modal-1" class="detail-btn">Xem Chi Tiết</label>
+        </div>
+      </div>
+
+      <div class="story-card health page-1-content">
+        <div class="story-image"></div>
+        <div class="story-content">
+          <h3 class="story-title">Sức Khỏe Bình An</h3>
+          <p class="story-quote">
+            "Sống tốt không còn là nỗi lo hàng tốn nhất"
+          </p>
+          <p class="story-description">
+            Gia đình chị Lan từng đối mặt với khó khăn y tế. Sau khi được hỗ trợ
+            khám chữa bệnh miễn phí, cuộc sống của họ đã thay đổi tích cực.
+          </p>
+          <label for="modal-2" class="detail-btn">Xem Chi Tiết</label>
+        </div>
+      </div>
+
+      <div class="story-card housing page-1-content">
+        <div class="story-image"></div>
+        <div class="story-content">
+          <h3 class="story-title">Mái Ấm Mới</h3>
+          <p class="story-quote">"Ngôi nhà mới là khởi đầu cho hy vọng"</p>
+          <p class="story-description">
+            Anh Tài và gia đình từng sống trong ngôi nhà dột nát, thiếu an toàn.
+            Sau khi xây nhà, họ giờ đây có một mái ấm kiên cố và vững tin,căn
+            nhà mới được xây dựng với những vật liệu chất lượng cao
+          </p>
+          <label for="modal-3" class="detail-btn">Xem Chi Tiết</label>
+        </div>
+      </div>
+
+      <!-- Page 2 Content -->
+      <div class="story-card education page-2-content">
+        <div class="story-image"></div>
+        <div class="story-content">
+          <h3 class="story-title">Lớp Học Xanh</h3>
+          <p class="story-quote">
+            "Giáo dục là nền tảng của tương lai bền vững"
+          </p>
+          <p class="story-description">
+            Trường tiểu học xã An Bình được xây dựng với mô hình lớp học xanh,
+            giúp học sinh có môi trường học tập thân thiện với thiên nhiên và
+            bền vững.
+          </p>
+          <label for="modal-4" class="detail-btn">Xem Chi Tiết</label>
+        </div>
+      </div>
+
+      <div class="story-card health page-2-content">
+        <div class="story-image"></div>
+        <div class="story-content">
+          <h3 class="story-title">Chăm Sóc Người Già</h3>
+          <p class="story-quote">"Tuổi già không còn cảm thấy bỏ rơi"</p>
+          <p class="story-description">
+            Dự án chăm sóc sức khỏe cho người cao tuổi tại làng Hòa Bình đã mang
+            lại niềm vui và sự an tâm cho các cụ già trong làng.Chương trình
+            cung cấp dịch vụ khám bệnh định kỳ.
+          </p>
+          <label for="modal-5" class="detail-btn">Xem Chi Tiết</label>
+        </div>
+      </div>
+
+      <div class="story-card housing page-2-content">
+        <div class="story-image"></div>
+        <div class="story-content">
+          <h3 class="story-title">Nhà Chống Lũ</h3>
+          <p class="story-quote">"An toàn trước thiên tai là quyền cơ bản"</p>
+          <p class="story-description">
+            Những ngôi nhà chống lũ được xây dựng tại vùng thường xuyên bị lũ
+            lụt, giúp người dân không còn phải lo lắng mỗi khi mùa mưa đếnCác
+            công trình này được thiết kế với nền móng vững chắc.
+          </p>
+          <label for="modal-6" class="detail-btn">Xem Chi Tiết</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="pagination">
+      <label for="page-1">
+        <div class="page-btn">1</div>
+      </label>
+      <label for="page-2">
+        <div class="page-btn">2</div>
+      </label>
+    </div>
+
+    <!-- Modals for story details -->
+    <div class="modal modal-1">
+      <div class="modal-content">
+        <label for="modal-1" class="close-btn">×</label>
+        <h2 class="modal-title">Ánh Sáng Từ Miền Núi</h2>
+        <div class="modal-image"></div>
+        <p class="modal-quote">
+          "Chúng tôi chưa từng nghĩ là trẻ có thể học được hơn đến đến"
+        </p>
+        <div class="modal-text">
+          <p>
+            Thôn Thiên Sơn nằm sâu trong vùng núi cao của tỉnh Lào Cai, nơi có
+            hơn 80% dân số là đồng bào dân tộc thiểu số. Trước đây, trẻ em nơi
+            đây phải đi bộ hơn 7km đường núi hiểm trở để đến trường, nhiều em đã
+            phải bỏ học giữa chừng vì điều kiện khó khăn.
+          </p>
+          <p>
+            Năm 2023, dự án "Ánh Sáng Từ Miền Núi" được triển khai với mục tiêu
+            xây dựng một trường học ngay tại thôn, cung cấp trang thiết bị học
+            tập, và đào tạo giáo viên tại chỗ. Sau 8 tháng xây dựng, ngôi trường
+            mới đã hoàn thành với 5 phòng học khang trang, một thư viện nhỏ, và
+            đầy đủ thiết bị học tập.
+          </p>
+          <p>
+            Cô Hà Thị Mai, giáo viên tại trường, chia sẻ: "Trước đây, tỷ lệ trẻ
+            em bỏ học là 45%, nhưng giờ đây gần như 100% trẻ em trong độ tuổi
+            đến trường đều được đi học. Chúng tôi thấy sự tiến bộ rõ rệt ở các
+            em, đặc biệt là khả năng đọc và viết tiếng Việt."
+          </p>
+          <p>
+            Bà Lý Thị Mây, một phụ huynh trong thôn, xúc động nói: "Con tôi giờ
+            đây thích đi học lắm. Nó còn dạy tôi đọc chữ nữa. Chúng tôi chưa
+            từng nghĩ trẻ em ở đây có thể học hành đến nơi đến chốn như vậy."
+          </p>
+          <p>
+            Dự án không chỉ mang lại cơ hội học tập cho trẻ em mà còn thay đổi
+            nhận thức của người dân về tầm quan trọng của giáo dục. Nhiều gia
+            đình giờ đây đã ưu tiên cho con em đi học thay vì giữ các em ở nhà
+            phụ giúp công việc đồng áng.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal modal-2">
+      <div class="modal-content">
+        <label for="modal-2" class="close-btn">×</label>
+        <h2 class="modal-title">Sức Khỏe Bình An</h2>
+        <div class="modal-image"></div>
+        <p class="modal-quote">"Sống tốt không còn là nỗi lo hàng tốn nhất"</p>
+        <div class="modal-text">
+          <p>
+            Gia đình chị Lan sống tại một vùng nông thôn xa xôi của tỉnh Quảng
+            Nam. Chồng chị - anh Minh - là lao động chính trong gia đình không
+            may bị tai nạn lao động dẫn đến bệnh phổi nghiêm trọng. Chi phí điều
+            trị lớn đã đẩy gia đình chị vào cảnh nợ nần chồng chất.
+          </p>
+          <p>
+            Vào tháng 3 năm 2024, dự án "Sức Khỏe Bình An" đã được triển khai
+            tại địa phương, mang đến cơ hội khám chữa bệnh miễn phí cho những
+            gia đình có hoàn cảnh khó khăn. Anh Minh đã được các bác sĩ trong dự
+            án thăm khám và điều trị, đồng thời được hướng dẫn các phương pháp
+            phục hồi sức khỏe tại nhà.
+          </p>
+          <p>
+            Chị Lan chia sẻ với niềm vui: "Trước đây, mỗi lần nhìn chồng ho là
+            tôi lại lo lắng không biết có tiền đưa anh ấy đi viện không Bewh đây
+            anh ấy được các bác sĩ theo dõi sức khỏe thường xuyên, bệnh tình đã
+            ổn định hơn nhiều."
+          </p>
+          <p>
+            Không chỉ được hỗ trợ về y tế, gia đình chị Lan còn được tư vấn về
+            sinh kế bền vững. Với một khoản vay ưu đãi từ dự án, chị đã mở một
+            quầy bán đồ ăn sáng nhỏ trước nhà, tạo thêm thu nhập ổn định cho gia
+            đình.
+          </p>
+          <p>
+            "Giờ đây không chỉ sức khỏe chồng tôi được cải thiện, mà cuộc sống
+            gia đình tôi cũng khá hơn trước rất nhiều. Sức khỏe không còn là nỗi
+            lo lớn nhất của chúng tôi nữa," chị Lan nói với ánh mắt đầy hy vọng
+            về tương lai.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal modal-3">
+      <div class="modal-content">
+        <label for="modal-3" class="close-btn">×</label>
+        <h2 class="modal-title">Mái Ấm Mới</h2>
+        <div class="modal-image"></div>
+        <p class="modal-quote">"Ngôi nhà mới là khởi đầu cho hy vọng"</p>
+        <div class="modal-text">
+          <p>
+            Anh Tài và gia đình gồm vợ và hai con nhỏ sống trong một căn nhà tạm
+            bợ tại xã An Hòa, tỉnh Bến Tre. Căn nhà dột nát, thường xuyên bị
+            ngập nước khi mưa lớn hoặc triều cường, tạo ra môi trường ẩm thấp
+            gây bệnh cho các thành viên trong gia đình, đặc biệt là hai đứa trẻ
+            nhỏ.
+          </p>
+          <p>
+            Tháng 5/2024, dự án "Mái Ấm Mới" đã chọn gia đình anh Tài là một
+            trong 20 hộ gia đình được hỗ trợ xây dựng nhà ở kiên cố. Sau 2 tháng
+            thi công, ngôi nhà mới của gia đình anh Tài đã hoàn thành - một căn
+            nhà cấp 4 kiên cố với diện tích 50m², nền cao hơn mặt đường 0.5m để
+            tránh ngập lụt.
+          </p>
+          <p>
+            Anh Tài xúc động chia sẻ: "Trước đây cứ mỗi khi có dự báo mưa bão là
+            cả nhà tôi lại lo lắng không biết mái nhà có trụ nổi không. Giờ đây
+            với ngôi nhà mới, chúng tôi có thể yên tâm dù là mưa bão mùa."
+          </p>
+          <p>
+            Chị Hương, vợ anh Tài, thêm vào: "Hai đứa nhỏ nhà tôi trước đây
+            thường xuyên bị cảm, ho do ở trong nhà ẩm thấp. Từ khi có nhà mới,
+            sức khỏe các cháu đã cải thiện đáng kể, chúng còn ít nghỉ học hơn
+            trước."
+          </p>
+          <p>
+            Ngôi nhà mới không chỉ mang lại sự an toàn, thoải mái cho gia đình
+            anh Tài mà còn tạo động lực để họ phấn đấu xây dựng cuộc sống tốt
+            đẹp hơn. Anh Tài đã bắt đầu học nghề sửa chữa điện tử, và chị Hương
+            đang tham gia một nhóm phụ nữ làm các sản phẩm thủ công từ lá dừa để
+            tăng thu nhập cho gia đình.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal modal-4">
+      <div class="modal-content">
+        <label for="modal-4" class="close-btn">×</label>
+        <h2 class="modal-title">Lớp Học Xanh</h2>
+        <div class="modal-image"></div>
+        <p class="modal-quote">"Giáo dục là nền tảng của tương lai bền vững"</p>
+        <div class="modal-text">
+          <p>
+            Trường tiểu học xã An Bình, tỉnh Đồng Tháp trước đây có cơ sở vật
+            chất xuống cấp nghiêm trọng. Lớp học thiếu ánh sáng, nóng bức vào
+            mùa hè và lạnh lẽo vào mùa đông, ảnh hưởng đến việc học tập của học
+            sinh.
+          </p>
+          <p>
+            Dự án "Lớp Học Xanh" được triển khai từ tháng 9/2023 với mục tiêu
+            cải tạo hoàn toàn ngôi trường theo hướng thân thiện với môi trường.
+            Sau 6 tháng, trường tiểu học An Bình đã có diện mạo hoàn toàn mới
+            với các lớp học được thiết kế tối ưu để tận dụng ánh sáng tự nhiên,
+            hệ thống thu nước mưa để tưới vườn trường, và các tấm pin năng lượng
+            mặt trời cung cấp điện cho toàn trường.
+          </p>
+          <p>
+            Cô Nguyễn Thị Hoa, hiệu trưởng nhà trường chia sẻ: "Không chỉ môi
+            trường học tập được cải thiện, dự án còn mang đến cho học sinh những
+            bài học thực tế về bảo vệ môi trường. Các em được học cách trồng rau
+            sạch trong vườn trường, phân loại rác thải và hiểu về tầm quan trọng
+            của việc sử dụng năng lượng tái tạo."
+          </p>
+          <p>
+            Em Nguyễn Văn Nam, học sinh lớp 5 hào hứng nói: "Em thích nhất là
+            lớp học mới của chúng em. Trời nóng nhưng trong lớp mát mẻ, và em có
+            thể nhìn thấy vườn cây xanh ngay ngoài cửa sổ."
+          </p>
+          <p>
+            Dự án "Lớp Học Xanh" không chỉ dừng lại ở việc cải tạo cơ sở vật
+            chất mà còn mang lại một phương pháp giáo dục mới, gắn liền với thực
+            tiễn và bền vững. Các giáo viên được tập huấn về phương pháp dạy học
+            tích hợp các vấn đề môi trường vào các môn học chính khóa.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal modal-5">
+      <div class="modal-content">
+        <label for="modal-5" class="close-btn">×</label>
+        <h2 class="modal-title">Chăm Sóc Người Già</h2>
+        <div class="modal-image"></div>
+        <p class="modal-quote">"Tuổi già không còn cảm thấy bỏ rơi"</p>
+        <div class="modal-text">
+          <p>
+            Làng Hòa Bình thuộc tỉnh Thừa Thiên Huế có tỷ lệ người cao tuổi khá
+            cao, chiếm khoảng 20% dân số. Nhiều người già trong làng sống một
+            mình, con cái đi làm xa hoặc không có người thân chăm sóc. Vấn đề
+            sức khỏe và tinh thần của họ ngày càng trở nên đáng lo ngại.
+          </p>
+          <p>
+            Dự án "Chăm Sóc Người Già" được khởi động vào đầu năm 2024 với mục
+            tiêu xây dựng một mạng lưới hỗ trợ chăm sóc sức khỏe và tinh thần
+            cho người cao tuổi trong làng. Một trung tâm sinh hoạt cộng đồng
+            được thành lập, nơi các cụ có thể gặp gỡ, giao lưu và tham gia các
+            hoạt động như tập thể dục nhẹ nhàng, học hát, chơi cờ tướng và các
+            trò chơi dân gian khác.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-6">
+      <div class="modal-content">
+        <label for="modal-6" class="close-btn">×</label>
+        <h2 class="modal-title">Nhà Chống Lũ</h2>
+        <div class="modal-image"></div>
+        <p class="modal-quote">"An toàn trước thiên tai là quyền cơ bản"</p>
+        <div class="modal-text">
+          <p>
+            Vùng đồng bằng sông Cửu Long thường xuyên phải đối mặt với lũ lụt
+            hàng năm. Nhiều gia đình phải sống trong cảnh nước ngập vào nhà,
+            không chỉ gây thiệt hại về tài sản mà còn ảnh hưởng đến sức khỏe và
+            an toàn của người dân.
+          </p>
+          <p>
+            Dự án "Nhà Chống Lũ" được triển khai từ tháng 7/2024 tại các huyện
+            thường xuyên bị ngập lụt. Với sự hỗ trợ kỹ thuật từ các chuyên gia
+            kiến trúc và xây dựng, 50 hộ gia đình đã được xây dựng những ngôi
+            nhà chống lũ với thiết kế đặc biệt: nền nhà cao hơn mực nước lũ lịch
+            sử, vật liệu xây dựng chống chịu tốt với nước, và hệ thống thoát
+            nước hiệu quả.
+          </p>
+          <p>
+            Ông Trần Văn Bình, một hộ dân được hỗ trợ xây nhà chống lũ tại huyện
+            Tân Hồng, tỉnh Đồng Tháp chia sẻ: "Trước đây cứ đến mùa lũ là gia
+            đình tôi phải dọn đồ đạc lên cao, nhiều khi phải sơ tán đến nơi an
+            toàn. Bây giờ có ngôi nhà mới, dù nước có dâng cao, chúng tôi vẫn
+            yên tâm ở lại nhà mình."
+          </p>
+          <p>
+            Bà Lê Thị Mỹ Hạnh, cán bộ phụ trách dự án cho biết: "Những ngôi nhà
+            này không chỉ giúp người dân an toàn trước thiên tai mà còn giúp họ
+            an tâm phát triển kinh tế, cải thiện đời sống. Chúng tôi cũng tập
+            huấn cho người dân kỹ năng ứng phó với lũ lụt và biến đổi khí hậu."
+          </p>
+          <p>
+            Dự án "Nhà Chống Lũ" là một ví dụ điển hình về việc kết hợp giữa
+            kiến thức kỹ thuật hiện đại và sự thích ứng với điều kiện tự nhiên,
+            mang lại cuộc sống an toàn hơn cho người dân vùng thường xuyên bị
+            thiên tai.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-container">
+      <footer id="footer">
+        <section class="card-first">
+          <div class="logo-text">
+            <a href="index.html">
+              <img src="../assets/logo.jpg" alt="Logo" />
+            </a>
+            <h3>Your Journey, Their Hope</h3>
+          </div>
+          <div class="text-footer">
+            <h3>
+              Volunteer Match – Cầu nối cho những trái tim tình nguyện, lan tỏa
+              yêu thương đến các vùng khó khăn tại Việt Nam và khắp nơi trên thế
+              giới.
+            </h3>
+          </div>
+
+          <div class="link-footer">
+            <h3>🌐 Kết nối với chúng tôi:</h3>
+            <a
+              href="https://www.facebook.com/volunteer.match.2025/"
+              target="_blank"
+              aria-label="Facebook"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            <a href="#" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </div>
+
+          <div class="introduction">
+            <a href="tel:0905622341"> <i class="fas fa-phone"></i>0905622341</a>
+            <p>
+              <i class="fas fa-map-marker-alt"></i>Địa chỉ: 123 Đường ABC, Quận
+              XYZ, TP.HCM
+            </p>
+            <p>
+              <i class="fas fa-envelope"></i> Email:
+              <a href="mailto:an@example.com">an@example.com</a>
+            </p>
+          </div>
+        </section>
+
+        <div class="card-second">
+          <h3>Liên Kết Nhanh</h3>
+          <ul>
+            <li>
+              <a href="../header.html"><i class="fas fa-home"></i> Trang Chủ</a>
+            </li>
+            <li>
+              <a href="vechungtoi.html"
+                ><i class="fas fa-users"></i> Về Chúng Tôi</a
+              >
+            </li>
+            <li>
+              <a href="hanhtrinh.html"
+                ><i class="fas fa-route"></i> Hành Trình</a
+              >
+            </li>
+            <li>
+              <a href="thamgia.html"
+                ><i class="fas fa-hands-helping"></i> Tham Gia</a
+              >
+            </li>
+            <li>
+              <a href="lienhe.html"><i class="fas fa-envelope"></i> Liên Hệ</a>
+            </li>
+            <li>
+              <a href="tinmoi.html"><i class="fas fa-newspaper"></i> Tin Mới</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card-third">
+          <h3>Chính Sách</h3>
+          <p>
+            Thông tin về các chính sách và điều khoản áp dụng khi sử dụng dịch
+            vụ của chúng tôi.
+          </p>
+          <div class="policy-links">
+            <ul>
+              <li>
+                <a href="chinhsachbaomat.html"
+                  ><i class="fas fa-shield-alt"></i> Chính Sách Bảo Mật</a
+                >
+              </li>
+              <li>
+                <a href="chinhsachhoanhuy.html"
+                  ><i class="fas fa-undo-alt"></i> Chính Sách Hoàn Hủy</a
+                >
+              </li>
+              <li>
+                <a href="dieukhoansudung.html"
+                  ><i class="fas fa-file-contract"></i> Điều Khoản Sử Dụng</a
+                >
+              </li>
+              <li>
+                <a href="yeuthuong.html"
+                  ><i class="fas fa-heart"></i> Gieo Yêu Thương</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../js/login.js"></script>
+  </body>
+</html>

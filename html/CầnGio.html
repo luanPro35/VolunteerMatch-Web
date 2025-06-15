@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Tour Thiện Nguyện Tây Nguyên</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #f5f5f5;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 1600px;
+        margin: 40px auto;
+        padding: 0 24px;
+      }
+
+      .title {
+        font-size: 28px;
+        color: #2e6600;
+        margin-bottom: 30px;
+      }
+
+      .content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: flex-start;
+      }
+
+      .image-container {
+        flex: 2;
+        border-radius: 18px;
+        overflow: hidden;
+        max-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .tour-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .info-card {
+        flex: 1;
+        width: 100%;
+        max-width: 400px;
+        min-width: 300px;
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        align-self: flex-start;
+      }
+
+      .info-card h2 {
+        color: #382711;
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .info-item {
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: #333;
+      }
+
+      .info-label {
+        font-weight: bold;
+        margin-right: 5px;
+      }
+
+      .date-selection {
+        margin-top: 15px;
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: #333;
+        font-weight: bold;
+      }
+
+      .date-options {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .date-option {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: center;
+        min-width: 60px;
+      }
+
+      .price {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 12px;
+      }
+
+      .contact-btn {
+        background-color: #fff;
+        color: #e74c3c;
+        border: 1px solid #ddd;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        display: inline-block;
+        text-decoration: none;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .contact-btn:hover {
+        background-color: #808080;
+        color: #fff;
+      }
+
+      .book-btn {
+        background-color: #2e6600;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        display: inline-block;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        text-align: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .book-btn:hover {
+        background-color: #808080;
+      }
+
+      .icon {
+        margin-right: 8px;
+      }
+      .info-card-1 {
+        background-color: #fff;
+        border-radius: 16px;
+        padding: 28px 32px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        margin-bottom: 32px;
+        max-width: 1060px;
+      }
+      .title-1 {
+        color: #2e6600;
+        font-size: 24px;
+        font-weight: bold;
+        margin: 40px 0 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .info-card-1 ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .info-card-1 ul li {
+        font-size: 16px;
+        font-weight: 300;
+        color: #333;
+        margin-bottom: 15px;
+        padding-left: 0;
+      }
+
+      .info-card-1 .image-container {
+        margin-bottom: 12px;
+      }
+
+      .info-card-1 .title-1 {
+        color: #8e44ad;
+        font-size: 1.5em;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .info-card-1 p {
+        font-size: 1em;
+        line-height: 1.6;
+        color: #555;
+        margin-top: 0;
+        font-weight: 600;
+      }
+      .tab-container {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 20px;
+        max-width: 600px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .tab-buttons {
+        display: flex;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+      }
+
+      .tab-button {
+        background: none;
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #777;
+        border-bottom: 2px solid transparent;
+        transition: color 0.3s ease, border-bottom-color 0.3s ease;
+      }
+
+      .tab-button:hover {
+        color: #555;
+      }
+
+      .tab-button.active {
+        color: #2e6600;
+        border-bottom-color: #2e6600;
+      }
+
+      .tab-content {
+        display: none;
+        padding-top: 15px;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .tab-content.active {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .tab-content h3 {
+        color: #333;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .tab-content p {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 10px;
+      }
+
+      .tab-content ol,
+      .tab-content ul {
+        padding-left: 20px;
+        margin-bottom: 10px;
+      }
+
+      .tab-content li {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 5px;
+      }
+
+      .tab-content strong {
+        font-weight: bold;
+        color: #333;
+      }
+      .place-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding-bottom: 30px;
+      }
+
+      .place-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: calc(33.333% - 16px);
+        background-color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .place-img {
+        width: 100%;
+        display: block;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .place-img:hover {
+        opacity: 0.9;
+      }
+
+      .place-body {
+        padding: 16px;
+        font-size: 15px;
+        background-color: #fff;
+      }
+
+      .place-heading {
+        font-size: 15px;
+        font-weight: 600;
+        color: #2e6600;
+      }
+      h3 {
+        color: #2e6600;
+      }
+
+      .place-time {
+        padding-top: 15px;
+        color: #757575;
+      }
+
+      .place-desc {
+        padding-top: 15px;
+        line-height: 1.4;
+      }
+
+      .place-buy-btn {
+        color: #fff;
+        background-color: #2e6600;
+        text-decoration: none;
+        padding: 11px 16px;
+        display: inline-block;
+        margin-top: 15px;
+        transition: all 0.3s ease;
+        border-radius: 6px;
+        box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+        animation: pulse 1.5s infinite;
+      }
+
+      .place-buy-btn:hover {
+        color: #000;
+        background-color: #ccc;
+      }
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(8, 175, 39, 0.7);
+        }
+        70% {
+          transform: scale(1.05);
+          box-shadow: 0 0 0 10px rgba(14, 169, 11, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(22, 209, 13, 0);
+        }
+      }
+      .schedule {
+        color: #2e6600;
+        padding-bottom: 20px;
+      }
+      .clear {
+        clear: both;
+      }
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+        z-index: 999;
+        padding-top: 60px;
+      }
+
+      .modal:target {
+        display: block;
+      }
+
+      .modal-content {
+        background: #fff;
+        margin: auto;
+        padding: 24px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 600px;
+        position: relative;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .modal-img {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 16px;
+      }
+
+      .modal-title {
+        color: #8e44ad;
+        font-size: 22px;
+        margin-bottom: 10px;
+      }
+
+      .modal-text {
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 12px;
+        right: 18px;
+        font-size: 26px;
+        color: #aaa;
+        text-decoration: none;
+      }
+
+      .close-btn:hover {
+        color: #000;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #2e6600;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        display: none;
+        z-index: 1000;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        text-align: center;
+      }
+
+      .back-to-top:hover {
+        background-color: #808080;
+        transform: scale(1.05);
+      }
+
+      .back-to-top.show {
+        display: block;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 0;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 20px 20px 0 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .modal-header h2 {
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .close {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .close:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .modal-body {
+        padding: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e1e8ed;
+        border-radius: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+        background-color: #f8f9fa;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        background-color: white;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .submit-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #ffffff;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .success-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #28a745;
+        color: white;
+        padding: 20px 30px;
+        border-radius: 10px;
+        z-index: 1002;
+        display: none;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .title {
+          font-size: 2rem;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .contact-btn,
+        .book-btn {
+          width: 100%;
+        }
+
+        .modal-content {
+          margin: 10% auto;
+          width: 95%;
+        }
+
+        .modal-body {
+          padding: 20px;
+        }
+
+        .tour-image img,
+        .image-container img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Tour Trồng Cây Gây Rừng & Thiện Nguyện – Cần Giờ</h1>
+
+      <div class="content">
+        <div class="image-container">
+          <img
+            src="../assets/trong-cay-can-gio-25-scaled.jpg.webp"
+            alt="Tour Cần Giờ"
+          />
+        </div>
+
+        <div class="info-card">
+          <h2>Thông tin tour</h2>
+          <div class="info-item"><strong>Thời gian:</strong> Trong 1 ngày</div>
+          <div class="info-item"><strong>Phương tiện:</strong> Xe 45 chỗ</div>
+          <div class="info-item>
+            <strong>Khởi hành từ:</strong> Theo yêu cầu quý khách
+          </div>
+          <div class="info-item price">
+            Chỉ từ: <strong>990.000 đ/khách</strong>
+          </div>
+          <div class="action-buttons">
+            <a href="#" class="contact-btn">📩 Gửi yêu cầu thiết kế riêng</a>
+            <button
+              id="openModal"
+              class="book-btn"
+              aria-label="Đặt chỗ ngay cho tour Vân Hồ"
+            >
+              🔥 Đặt chỗ ngay!
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="title-1">🌿 Điểm nhấn hành trình</h2>
+      <div class="info-card-1">
+        <ul>
+          <li>🌳 Tham quan rừng ngập mặn nguyên sinh Cần Giờ</li>
+          <li>
+            🐒 Giao lưu với đàn khỉ đuôi dài và các loài động vật quý hiếm
+          </li>
+          <li>💚 Hoạt động trồng cây, gây rừng - góp phần bảo vệ môi trường</li>
+          <li>🎁 Tham gia thiện nguyện ý nghĩa cùng cộng đồng</li>
+        </ul>
+      </div>
+
+      <h2 class="title-1">🎁 Dịch vụ bao gồm</h2>
+      <div class="info-card-1">
+        <ul>
+          <li>🚐 Xe du lịch hiện đại, điều hòa, đưa đón suốt tuyến</li>
+          <li>🍜 01 bữa sáng và 01 bữa trưa định mức 200.000đ/khách</li>
+          <li>🥤 01 chai nước + 01 khăn lạnh/ngày</li>
+          <li>🛡️ Bảo hiểm MIC trị giá 60 triệu đồng/khách/vụ</li>
+          <li>✅ Bao gồm VAT 10%</li>
+        </ul>
+      </div>
+
+      <h2 class="title-1">❌ Không bao gồm</h2>
+      <div class="info-card-1">
+        <ul>
+          <li>🛏️ Phí ngủ phòng đơn & chi phí cá nhân ngoài chương trình</li>
+          <li>💰 Tiền bồi dưỡng HDV, tài xế</li>
+          <li>✈️ Hành lý ký gửi, vé máy bay (nếu có)</li>
+          <li>⛔ Chi phí phát sinh do bất khả kháng</li>
+        </ul>
+      </div>
+
+      <h2 class="title-1">👶 Chính sách trẻ em</h2>
+      <div class="info-card-1">
+        <ul>
+          <li>Dưới 3 tuổi: miễn phí, bố mẹ tự lo</li>
+          <li>3-5 tuổi: 50% giá tour</li>
+          <li>6-9 tuổi: 75% giá tour</li>
+          <li>Trên 9 tuổi: tính như người lớn</li>
+        </ul>
+      </div>
+      <h2 class="schedule">🚌 Lịch trình</h2>
+
+      <div class="place-list">
+        <div class="place-item">
+          <img src="../assets/danxay.webp" alt="Dần Xây" class="place-img" />
+          <div class="place-body">
+            <h3 class="place-heading">Điểm trồng cây (3) - Dần Xây</h3>
+            <p class="place-desc">
+              Khu vực trồng cây tại Dần Xây – nơi bảo tồn sinh thái đặc biệt
+              thuộc rừng ngập mặn.
+            </p>
+            <a href="#modal-danxay" class="place-buy-btn">Xem thêm</a>
+          </div>
+        </div>
+        <div class="place-item">
+          <img
+            src="../assets/rungngapman.webp"
+            alt="Rừng ngập mặn"
+            class="place-img"
+          />
+          <div class="place-body">
+            <h3 class="place-heading">Điểm trồng cây (13) - Rừng ngập mặn</h3>
+            <p class="place-desc">
+              Khám phá hệ sinh thái phong phú và tham gia bảo tồn môi trường.
+            </p>
+            <a href="#modal-rungngapman" class="place-buy-btn">Xem thêm</a>
+          </div>
+        </div>
+        <div class="place-item">
+          <img
+            src="../assets/chungnhan.webp"
+            alt="Chứng nhận"
+            class="place-img"
+          />
+          <div class="place-body">
+            <h3 class="place-heading">Điểm trồng cây (23) - Nhận chứng nhận</h3>
+            <p class="place-desc">
+              Tham gia trồng cây và nhận chứng nhận đóng góp vì môi trường xanh.
+            </p>
+            <a href="#modal-chungnhan" class="place-buy-btn">Xem thêm</a>
+          </div>
+        </div>
+        <div class="clear"></div>
+      </div>
+      <div id="modal-danxay" class="modal">
+        <div class="modal-content">
+          <a href="#" class="close-btn">×</a>
+          <img src="../assets/danxay.webp" alt="Dần Xây" class="modal-img" />
+          <h2 class="modal-title">Chi tiết - Dần Xây</h2>
+          <p class="modal-text">
+            Điểm trồng cây tại khu vực Dần Xây, nằm trong khu bảo tồn rừng ngập
+            mặn Cần Giờ – nơi được UNESCO công nhận là khu dự trữ sinh quyển thế
+            giới. Tại đây, bạn sẽ cùng đội nhóm trồng cây đước non ven sông nhằm
+            khôi phục hệ sinh thái và chống xói mòn đất.
+          </p>
+        </div>
+      </div>
+
+      <div id="modal-rungngapman" class="modal">
+        <div class="modal-content">
+          <a href="#" class="close-btn">×</a>
+          <img
+            src="../assets/rungngapman.webp"
+            alt="Rừng ngập mặn"
+            class="modal-img"
+          />
+          <h2 class="modal-title">Chi tiết - Rừng ngập mặn</h2>
+          <p class="modal-text">
+            Rừng ngập mặn Cần Giờ là hệ sinh thái đa dạng với hàng trăm loài
+            thực vật và động vật quý hiếm. Hoạt động trồng cây tại đây không chỉ
+            mang ý nghĩa môi trường mà còn giúp bạn tìm hiểu thêm về thiên nhiên
+            hoang dã và văn hóa bản địa.
+          </p>
+        </div>
+      </div>
+
+      <div id="modal-chungnhan" class="modal">
+        <div class="modal-content">
+          <a href="#" class="close-btn">×</a>
+          <img
+            src="../assets/chungnhan.webp"
+            alt="Chứng nhận"
+            class="modal-img"
+          />
+          <h2 class="modal-title">Chi tiết - Nhận chứng nhận</h2>
+          <p class="modal-text">
+            Sau khi hoàn thành hoạt động trồng cây, bạn sẽ được trao giấy chứng
+            nhận ghi nhận đóng góp cho việc phục hồi rừng ngập mặn. Đây không
+            chỉ là minh chứng cho hành trình xanh của bạn mà còn là kỷ niệm ý
+            nghĩa trong hành trình vì môi trường.
+          </p>
+        </div>
+      </div>
+
+      <div class="tab-container">
+        <div class="tab-buttons">
+          <button class="tab-button active" data-tab="tich-diem">
+            Tích điểm
+          </button>
+          <button class="tab-button" data-tab="quy-dinh">Quy định</button>
+        </div>
+
+        <div class="tab-content active" id="tich-diem-content">
+          <h3>🌟 Chương trình tích điểm VEO</h3>
+          <ul>
+            <li>+10 điểm khi tham gia tour trồng cây</li>
+            <li>+5 điểm khi đăng ký nhóm từ 3 người</li>
+            <li>+10 điểm khi chia sẻ bài viết lên mạng xã hội</li>
+          </ul>
+          <p>Đổi quà: áo, túi, voucher giảm giá 5-10%</p>
+        </div>
+
+        <div class="tab-content" id="quy-dinh-content">
+          <h3>📋 Quy định tham gia tour</h3>
+          <ol>
+            <li>Tôn trọng cộng đồng địa phương và môi trường</li>
+            <li>Không tách đoàn, hành xử văn minh</li>
+            <li>Tuân thủ quy định bảo vệ thiên nhiên</li>
+            <li>Thực hiện đúng quy định an toàn, phòng dịch</li>
+            <li>Công ty có quyền từ chối phục vụ nếu vi phạm nội quy</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Form -->
+    <div
+      id="registrationModal"
+      class="modal"
+      role="dialog"
+      aria-labelledby="modalTitle"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">🌟 Đăng Ký Tham Gia Tour</h2>
+          <button class="close" aria-label="Đóng form đăng ký">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="registrationForm">
+            <div class="form-group">
+              <label for="name">Họ và tên *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Nhập họ và tên của bạn"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="birthdate">Ngày sinh *</label>
+              <input
+                type="date"
+                id="birthdate"
+                name="birthdate"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Số điện thoại *</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Nhập số điện thoại"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="id_card">Số căn cước công dân *</label>
+              <input
+                type="text"
+                id="id_card"
+                name="id_card"
+                placeholder="Nhập số CCCD/CMND"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Nhập email của bạn"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="trip_name">Tên chuyến đi</label>
+              <input
+                type="text"
+                id="trip_name"
+                name="trip_name"
+                value="Tour du lịch tình nguyện Vân Hồ – Sơn La"
+                readonly
+                aria-readonly="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="departure_date">Ngày khởi hành *</label>
+              <select
+                id="departure_date"
+                name="departure_date"
+                required
+                aria-required="true"
+              >
+                <option value="" disabled selected>Chọn ngày khởi hành</option>
+                <option value="2025-04-30">30/04/2025</option>
+                <option value="2025-05-10">10/05/2025</option>
+                <option value="2025-06-28">28/06/2025</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="submit-btn"
+              id="submitBtn"
+              aria-label="Xác nhận đăng ký tour"
+            >
+              ✨ Xác nhận đăng ký
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div
+      id="successMessage"
+      class="success-message"
+      role="alert"
+      aria-live="assertive"
+    >
+      <h3>🎉 Đăng ký thành công!</h3>
+      <p>Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ sớm nhất!</p>
+    </div>
+
+    <button class="back-to-top" title="Về trang chủ">Quay lại trang chủ</button>
+
+    <script>
+      // Thay thế hàm saveToDatabase trong các file tour (.html)
+async function saveToDatabase(formData) {
+  try {
+    const now = new Date();
+    const vietnamTime = new Date(now.getTime() + 7 * 60 * 60 * 1000);
+
+    const response = await fetch('http://localhost:3000/api/tour-registrations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tour_id: "can-gio", // ID cho tour Cần Giờ
+        full_name: formData.name,
+        birthdate: formData.birthdate,
+        phone: formData.phone,
+        id_card: formData.id_card,
+        email: formData.email,
+        trip_name: "Tour Trồng Cây Gây Rừng & Thiện Nguyện – Cần Giờ", // Tên tour Cần Giờ
+        departure_date: formData.departure_date,
+        registration_date: vietnamTime.toISOString().split('T')[0],
+        registration_time: vietnamTime.toTimeString().split(' ')[0]
+      })
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'Có lỗi xảy ra');
+    }
+
+    console.log('Đăng ký tour thành công:', data);
+    return true;
+
+  } catch (error) {
+    console.error("Lỗi khi lưu đăng ký:", error);
+    return false;
+  }
+}
+
+      // Modal handling
+      const modal = document.getElementById("registrationModal");
+      const openModalBtn = document.getElementById("openModal");
+      const closeModalBtn = document.querySelector(".close");
+      const registrationForm = document.getElementById("registrationForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const successMessage = document.getElementById("successMessage");
+
+      // Mở modal
+      openModalBtn.addEventListener("click", () => {
+        modal.style.display = "block";
+        document.getElementById("name").focus(); // Focus on first input for accessibility
+      });
+
+      // Đóng modal
+      closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        registrationForm.reset();
+      });
+
+      // Đóng modal khi click bên ngoài
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+          registrationForm.reset();
+        }
+      });
+
+      // Xử lý submit form
+      registrationForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading"></span>Đang xử lý...';
+
+        const formData = {
+          name: document.getElementById("name").value.trim(),
+          birthdate: document.getElementById("birthdate").value,
+          phone: document.getElementById("phone").value.trim(),
+          id_card: document.getElementById("id_card").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          trip_name: document.getElementById("trip_name").value,
+          departure_date: document.getElementById("departure_date").value,
+        };
+
+        // Kiểm tra định dạng email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+          alert("Vui lòng nhập email hợp lệ!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        // Kiểm tra định dạng số điện thoại
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(formData.phone)) {
+          alert("Vui lòng nhập số điện thoại hợp lệ (10 số)!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        // Kiểm tra định dạng CCCD/CMND
+        const idCardRegex = /^\d{9,12}$/;
+        if (!idCardRegex.test(formData.id_card)) {
+          alert("Vui lòng nhập số CCCD/CMND hợp lệ (9-12 số)!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        // Kiểm tra ngày sinh (người tham gia phải từ 5 tuổi trở lên)
+        const birthDate = new Date(formData.birthdate);
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (
+          monthDiff < 0 ||
+          (monthDiff === 0 && today.getDate() < birthDate.getDate())
+        ) {
+          age--;
+        }
+        if (age < 5) {
+          alert("Người tham gia phải từ 5 tuổi trở lên!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        // Lưu vào database
+        const saved = await saveToDatabase(formData);
+
+        if (saved) {
+          successMessage.style.display = "block";
+          setTimeout(() => {
+            successMessage.style.display = "none";
+            modal.style.display = "none";
+            registrationForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          }, 3000);
+        } else {
+          alert("Có lỗi xảy ra khi lưu dữ liệu!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+        }
+      });
+
+      const tabButtons = document.querySelectorAll(".tab-button");
+      const tabContents = document.querySelectorAll(".tab-content");
+
+      tabButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const tabId = button.getAttribute("data-tab");
+          tabButtons.forEach((btn) => btn.classList.remove("active"));
+          tabContents.forEach((content) => content.classList.remove("active"));
+          button.classList.add("active");
+          document.getElementById(`${tabId}-content`).classList.add("active");
+        });
+      });
+
+      tabButtons[0].classList.add("active");
+      tabContents[0].classList.add("active");
+
+      const backToTopButton = document.querySelector(".back-to-top");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      });
+
+      backToTopButton.addEventListener("click", () => {
+        window.location.href = "../header.html";
+      });
+    </script>
+  </body>
+</html>

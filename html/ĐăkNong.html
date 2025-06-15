@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tour du lịch tình nguyện Đắk Nia – Đắk Nông, kết hợp hoạt động tình nguyện và khám phá văn hóa địa phương.">
+  <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+  <title>Tour du lịch Đắk Nông</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1600px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    
+    .title {
+      font-size: 28px;
+      color: #4a148c;
+      margin-bottom: 30px;
+    }
+    
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: flex-start;
+    }
+    
+    .image-container {
+      flex: 2;
+      border-radius: 18px;
+      overflow: hidden;
+      max-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .tour-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    
+    .info-card {
+      flex: 1;
+      width: 100%;
+      max-width: 400px;
+      min-width: 300px;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      align-self: flex-start;
+    }
+    
+    .info-card h2 {
+      color: #382711;
+      margin-top: 0;
+      margin-bottom: 16px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+    
+    .info-item {
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #333;
+    }
+    
+    .info-label {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+    
+    .date-selection {
+      margin-top: 15px;
+      margin-bottom: 8px;
+      font-size: 16px;
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .date-options {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    
+    .date-option {
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+      min-width: 60px;
+    }
+    
+    .price {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+    
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+    }
+    
+    .contact-btn {
+      background-color: #fff;
+      color: #e74c3c;
+      border: 1px solid #ddd;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      text-decoration: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    
+    .contact-btn:hover {
+      background-color: #808080;
+      color: #fff;
+    }
+    
+    .book-btn {
+      background-color: #4a235a;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    
+    .book-btn:hover {
+      background-color: #808080;
+    }
+    
+    .info-card-1 {
+      background-color: #fff;
+      border-radius: 16px;
+      padding: 28px 32px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 32px;
+      max-width: 1060px;
+    }
+    
+    .title-1 {
+      color: #6a1b9a;
+      font-size: 24px;
+      font-weight: bold;
+      margin: 40px 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .info-card-1 ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .info-card-1 ul li {
+      font-size: 16px;
+      font-weight: 300;
+      color: #333;
+      margin-bottom: 15px;
+      padding-left: 0;
+    }
+    
+    .info-card-1 .image-container {
+      margin-bottom: 12px;
+    }
+    
+    .info-card-1 .title-1 {
+      color: #8e44ad;
+      font-size: 1.5em;
+      font-weight: bold;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    
+    .info-card-1 p {
+      font-size: 1em;
+      line-height: 1.6;
+      color: #555;
+      margin-top: 0;
+      font-weight: 600;
+    }
+    
+    .tab-container {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      max-width: 600px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    .tab-buttons {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 10px;
+    }
+    
+    .tab-button {
+      background: none;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #777;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease, border-bottom-color 0.3s ease;
+    }
+    
+    .tab-button:hover {
+      color: #555;
+    }
+    
+    .tab-button.active {
+      color: #8e44ad;
+      border-bottom-color: #8e44ad;
+    }
+    
+    .tab-content {
+      display: none;
+      padding-top: 15px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .tab-content h3 {
+      color: #333;
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+    
+    .tab-content p {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    
+    .tab-content ol,
+    .tab-content ul {
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }
+    
+    .tab-content li {
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 5px;
+    }
+    
+    .tab-content strong {
+      font-weight: bold;
+      color: #333;
+    }
+    
+    .place-list {
+      margin: 32px -8px 0 -8px;
+      padding-bottom: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .place-item {
+      width: calc(50% - 16px);
+      display: flex;
+      flex-direction: column;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
+    
+    .place-img {
+      width: 100%;
+      display: block;
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .place-img:hover {
+      opacity: 0.9;
+    }
+    
+    .place-item:hover {
+      transform: translateY(-6px);
+    }
+    
+    .place-body {
+      padding: 16px;
+      font-size: 15px;
+      background-color: #fff;
+    }
+    
+    .place-heading {
+      font-size: 15px;
+      font-weight: 600;
+      color: #8e44ad;
+    }
+    
+    h3 {
+      color: #8e44ad;
+    }
+    
+    .place-desc {
+      padding-top: 15px;
+      line-height: 1.4;
+    }
+    
+    .place-buy-btn {
+      color: #fff;
+      background-color: #8e44ad;
+      text-decoration: none;
+      padding: 11px 16px;
+      display: inline-block;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
+      animation: pulse 1.5s infinite;
+    }
+    
+    .place-buy-btn:hover {
+      color: #000;
+      background-color: #ccc;
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(233, 30, 99, 0.7);
+      }
+      70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(233, 30, 99, 0);
+      }
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(233, 30, 99, 0);
+      }
+    }
+    
+    .schedule {
+      color: #8e44ad;
+      padding-bottom: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 40px 20px;
+      box-sizing: border-box;
+    }
+    
+    .modal-content {
+      background-color: #fff;
+      margin: auto;
+      max-width: 800px;
+      padding: 30px;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+      animation: slideUp 0.3s ease-out;
+    }
+    
+    .modal-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #8e44ad;
+    }
+    
+    .modal-text {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333;
+      white-space: pre-line;
+    }
+    
+    .close-btn {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      font-size: 28px;
+      font-weight: bold;
+      color: #aaa;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .close-btn:hover {
+      color: #333;
+    }
+    
+    #modal-day1:target .modal,
+    #modal-day2:target .modal,
+    #modal-day3:target .modal {
+      display: block;
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .modal-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    /* Back to Home Button */
+    .back-to-home {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #4a235a;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      display: none;
+      z-index: 1000;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      border: none;
+      text-align: center;
+    }
+
+    .back-to-home:hover {
+      background-color: #808080;
+      transform: scale(1.05);
+    }
+
+    .back-to-home.show {
+      display: block;
+    }
+
+    /*  */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 0;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 20px 20px 0 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .modal-header h2 {
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .close {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .close:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .modal-body {
+        padding: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e1e8ed;
+        border-radius: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+        background-color: #f8f9fa;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        background-color: white;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .submit-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #ffffff;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .success-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #28a745;
+        color: white;
+        padding: 20px 30px;
+        border-radius: 10px;
+        z-index: 1002;
+        display: none;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .title {
+          font-size: 2rem;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .contact-btn,
+        .book-btn {
+          width: 100%;
+        }
+
+        .modal-content {
+          margin: 10% auto;
+          width: 95%;
+        }
+
+        .modal-body {
+          padding: 20px;
+        }
+
+        .tour-image img,
+        .image-container img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Tour du lịch tình nguyện Đắk Nia – Đắk Nông</h1>
+    <div class="content">
+      <div class="image-container">
+        <div class="tour-image">
+          <img src="../assets/GL1-OK.jpg" alt="Tour Đắk Nông" width="100%" height="auto" loading="lazy">
+        </div>
+      </div>
+      <div class="info-card">
+        <h2>Lịch khởi hành và chi phí</h2>
+        <div class="info-item">
+          <span class="info-label">Khởi hành từ:</span> TP Hồ Chí Minh
+        </div>
+        <div class="info-item">
+          <span class="info-label">Thời gian:</span> 2 ngày 2 đêm
+        </div>
+        <div class="date-selection">Chọn ngày khởi hành:</div>
+        <div class="date-options">
+          <div class="date-option">18/04</div>
+          <div class="date-option">09/05</div>
+          <div class="date-option">20/06</div>
+        </div>
+        <div class="price">2.990.000 đ</div>
+        <div class="action-buttons">
+          <a href="#" class="contact-btn">📞 Liên hệ tư vấn</a>
+            <button id="openModal" class="book-btn" aria-label="Đặt chỗ ngay cho tour Dăk Nong"> 🔥 Đặt chỗ ngay! </button>
+        </div>
+      </div>
+    </div>
+    <h2 class="title-1">💖 Hoạt động tình nguyện nổi bật</h2>
+    <div class="info-card-1">
+      <ul>
+        <li>🌼 Triển khai các hoạt động hỗ trợ thiết thực cho homestay tại Nông trại Phượng Vân, Đắk Nia</li>
+        <li>🌼 Thăm hỏi, tổ chức các giờ vui chơi và lớp học cộng đồng cho trẻ em tại Trường Tiểu học Tô Hiệu và Nhà trưng bày người Mạ</li>
+        <li>🌼 Hỗ trợ dọn dẹp và cải tạo cảnh quan, xây dựng thư viện cho trẻ em</li>
+        <li>🌼 Phát triển mô hình du lịch cộng đồng tại Đắk Nia – Đắk Nông</li>
+      </ul>
+    </div>
+    <h2 class="title-1">🌄 Hoạt động du lịch nổi bật</h2>
+    <div class="info-card-1">
+      <ul>
+        <li>📌 Khám phá Nhà trưng bày truyền thống của người Mạ</li>
+        <li>📌 Tham quan xưởng dệt thổ cẩm truyền thống của người dân tại hợp tác xã dệt thổ cẩm</li>
+        <li>📌 Hoạt động đốt lửa trại, tận hưởng không khí trong lành buổi đêm ở Nông trại Phượng Vân, Đắk Nia</li>
+        <li>📌 Trải nghiệm đi thuyền tham quan hồ Tà Đùng</li>
+        <li>📌 Tìm hiểu văn hóa đặc sắc của người Mạ và người M'Nông</li>
+      </ul>
+    </div>
+    <h2 class="schedule">🚌 Lịch trình</h2>
+    <div class="place-list">
+      <div class="place-item">
+        <img src="../assets/ngay1.jpg" alt="Ngày 1" class="place-img" width="100%" height="auto" loading="lazy">
+        <div class="place-body">
+          <h3 class="place-heading">🚌 Ngày 1 - Khởi hành</h3>
+          <p class="place-desc">
+            19h30: Tập trung tại Nhà Văn hóa Thanh niên<br>
+            20h00: Khởi hành
+          </p>
+          <a href="#modal-day1" class="place-buy-btn">Xem chi tiết</a>
+        </div>
+      </div>
+      <div class="place-item">
+        <img src="../assets/ngay2.jpg" alt="Ngày 2" class="place-img" width="100%" height="auto" loading="lazy">
+        <div class="place-body">
+          <h3 class="place-heading">🌿 Ngày 2 - Tình nguyện & Văn hóa</h3>
+          <p class="place-desc">
+            - Check-in homestay lúc 02h00<br>
+            - Dạy học, cải tạo cảnh quan tại Trường Tô Hiệu & Bon Nj Riêng<br>
+            - Khám phá nhà trưng bày người Mạ và xưởng dệt thổ cẩm<br>
+            - Sinh hoạt lửa trại buổi tối
+          </p>
+          <a href="#modal-day2" class="place-buy-btn">Xem chi tiết</a>
+        </div>
+      </div>
+      <div class="place-item">
+        <img src="../assets/ngay3.jpg" alt="Ngày 3" class="place-img" width="100%" height="auto" loading="lazy">
+        <div class="place-body">
+          <h3 class="place-heading">🌊 Ngày 3 - Tà Đùng & Kết thúc</h3>
+          <p class="place-desc">
+            - Tham quan hồ Tà Đùng<br>
+            - Check-in Tà Đùng Bay Homestay<br>
+            - Ăn trưa & về lại TP.HCM (19h30)
+          </p>
+          <a href="#modal-day3" class="place-buy-btn">Xem chi tiết</a>
+        </div>
+      </div>
+    </div>
+    <div id="modal-day1">
+      <div class="modal">
+        <div class="modal-content">
+          <a href="#" class="close-btn">×</a>
+          <img src="../assets/ngay1.jpg" alt="Ngày 1" class="modal-img" width="100%" height="auto" loading="lazy">
+          <h2 class="modal-title">Chi tiết Ngày 1 - Khởi hành</h2>
+          <p class="modal-text">
+            🕢 19h30: Tập trung cùng đoàn tại Nhà Văn hóa Thanh niên TP.HCM,<br>
+            📍 4 Phạm Ngọc Thạch, Bến Nghé, Quận 1, Hồ Chí Minh<br><br>
+            🕗 20h00: Khởi hành bằng xe du lịch, nghỉ đêm trên xe
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="modal-day2">
+      <div class="modal">
+        <div class="modal-content">
+          <a href="#" class="close-btn">×</a>
+          <img src="../assets/ngay2.jpg" alt="Ngày 2" class="modal-img" width="100%" height="auto" loading="lazy">
+          <h2 class="modal-title">Chi tiết Ngày 2 - Tình nguyện & Văn hóa</h2>
+          <p class="modal-text">
+            🕑 02h00: Check-in homestay tại Nông trại Phượng Vân, nghỉ ngơi<br>
+            🕡 06h30: Thức dậy, ăn sáng<br>
+            🕢 07h30: Di chuyển đến Trường Tiểu học Tô Hiệu để chuẩn bị hoạt động tình nguyện<br>
+            🕗 08h00: Bắt đầu các hoạt động tình nguyện:
+            <ul>
+              <li><strong>Nhóm Dạy học:</strong> Giao lưu học sinh về tiếng Anh, kỹ năng sống hoặc các dịp đặc biệt (1/6, Trung thu...)</li>
+              <li><strong>Nhóm Cơ sở:</strong> Trồng cây, sơn/vẽ tường, dọn dẹp thư viện, bổ sung sách truyện</li>
+              <li><strong>Nhóm Chương trình:</strong> Chuẩn bị nội dung Galanight & hỗ trợ nhóm khác</li>
+              <li><strong>Nhóm Marketing:</strong> Quay phim, chụp ảnh, truyền thông du lịch địa phương</li>
+            </ul>
+            🕥 10h30: Di chuyển về homestay<br>
+            🕚 11h00: Ăn trưa và nghỉ trưa<br><br>
+            🕐 13h00: Di chuyển đến Bon Nj Riêng, chuẩn bị hoạt động tình nguyện<br>
+            🕜 13h30: Tiếp tục các hoạt động tại Bon Nj Riêng<br>
+            🕞 15h30: Tổ chức gian hàng trò chơi tại nhà trưng bày người Mạ<br>
+            🕓 16h00: Khám phá Nhà trưng bày truyền thống của người Mạ<br>
+            🕔 17h00: Tham quan xưởng dệt thổ cẩm truyền thống<br>
+            🕠 17h30: Về homestay, vệ sinh cá nhân, nghỉ ngơi<br>
+            🕡 18h30: Ăn tối<br>
+            🕗 20h00: Sinh hoạt lửa trại và văn nghệ<br>
+            🕤 21h30: Nghỉ ngơi
+          </p>
+        </div>
+      </div>
+    </div>
+    <div id="modal-day3">
+      <div class="modal">
+        <div class="modal-content">
+          <a href="#" class="close-btn">×</a>
+          <img src="../assets/ngay3.jpg" alt="Ngày 3" class="modal-img" width="100%" height="auto" loading="lazy">
+          <h2 class="modal-title">Chi tiết Ngày 3 - Tà Đùng & Kết thúc</h2>
+          <p class="modal-text">
+            🕕 06h00: Thức dậy, thu dọn đồ đạc và ăn sáng<br>
+            🕖 07h00: Mang đồ ra xe, chụp ảnh lưu niệm với homestay<br>
+            🕢 07h30: Di chuyển đến bến thuyền hồ Tà Đùng (xã Đắk Glong)<br>
+            🕘 09h00: Đi thuyền tham quan hồ Tà Đùng<br>
+            🕙 10h00: Di chuyển đến Tà Đùng Bay homestay<br>
+            🕥 10h30: Check-in view hồ tuyệt đẹp tại Tà Đùng Bay<br>
+            🕦 11h30: Ăn trưa và thu dọn đồ đạc<br>
+            🕐 13h00: Lên xe trở về TP.HCM<br>
+            🕢 19h30: Về đến điểm tập trung – kết thúc hành trình đáng nhớ!
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="info-card-1">
+      <div class="image-container">
+        <img src="../assets/tour.jpg" alt="Mục tiêu dự án" style="width: 100%; border-radius: 10px; margin-top: 10px;" loading="lazy">
+      </div>
+      <h2 class="title-1">💜 Mục tiêu dự án</h2>
+      <p>
+        Mục tiêu dự án hướng tới bảo tồn và phát triển du lịch bền vững tại Đắk Nia – Đắk Nông. Thông qua các hoạt động hỗ trợ thiết thực như đào tạo kỹ năng việc làm, dạy học phi chính quy, quảng bá về hình ảnh du lịch cộng đồng tại địa phương, tổ chức các chương trình du lịch trải nghiệm, VEO mong muốn mang lại cơ hội phát triển kinh tế bền vững nhất cho người dân tộc Mạ và M’Nông tại đây.
+      </p>
+    </div>
+    <div class="tab-container">
+      <div class="tab-buttons">
+        <button class="tab-button active" data-tab="tich-diem">Hệ thống tích điểm</button>
+        <button class="tab-button" data-tab="quy-dinh">Quy định chuyến đi</button>
+      </div>
+      <div class="tab-content active" id="tich-diem-content">
+        <h3>🌟 TÍCH ĐIỂM VÈO VÈO</h3>
+        <p>Hệ thống tích điểm dành riêng cho các tình nguyện viên tham gia chuyến du lịch tình nguyện cùng VEO</p>
+        <ul>
+          <li>
+            <strong>💜 NHẬN VEO POINT</strong>
+            <ul>
+              <li>Tham gia 1 chuyến du lịch tình nguyện: 10 điểm</li>
+              <li>Đăng ký theo nhóm từ 3 người: 5 điểm</li>
+              <li>Viết chia sẻ công khai trên trang cá nhân: 10 điểm</li>
+            </ul>
+          </li>
+          <li>
+            <strong>🎁 ĐỔI VEO POINT</strong>
+            <ul>
+              <li>Áo VEO SIGNATURE: 40 điểm</li>
+              <li>Túi VEO LIFESTYLE: 30 điểm</li>
+              <li>Áo VEO LIFESTYLE: 50 điểm</li>
+              <li>Voucher 5% (áp dụng 1 lần cho tất cả các chuyến đi): 30 điểm</li>
+              <li>Voucher 10% (áp dụng 1 lần cho tất cả các chuyến đi): 60 điểm</li>
+            </ul>
+          </li>
+          <li>
+            <strong>👉 LƯU Ý:</strong>
+            <ul>
+              <li>Áp dụng thay thế các ưu đãi cũ cho tất cả chuyến du lịch tình nguyện từ ngày 01/07/2023</li>
+              <li>Không áp dụng cho chương trình Trại hè tình nguyện</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="tab-content" id="quy-dinh-content">
+        <h3>📋 Quy định chuyến đi</h3>
+        <ol>
+          <li>
+            <strong>Tôn trọng, hợp tác với tất cả các thành viên trong đoàn:</strong>
+            <ul>
+              <li>Thực hiện đúng theo kế hoạch do Ban tổ chức chương trình đề ra.</li>
+              <li>Tích cực tham gia các hoạt động của chương trình.</li>
+              <li>Không tự ý tách đoàn nếu không có sự trao đổi, đồng ý của BTC.</li>
+              <li>Thực hiện ứng xử có văn hóa. Đoàn kết, thân ái và giúp đỡ các thành viên khác.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Tôn trọng cộng đồng địa phương:</strong>
+            <ul>
+              <li>Giữ thái độ vui vẻ, hòa nhã với người dân địa phương.</li>
+              <li>Chấp hành tốt quy định của Pháp luật về: Giao thông đường bộ; an ninh trật tự, phòng chống cháy nổ và các tệ nạn xã hội.</li>
+              <li>Tuyệt đối không gây rối trật tự trên địa bàn tình nguyện; tàng trữ hung khí, vũ khí, vật liệu nổ.</li>
+              <li>Tuyệt đối không lợi dụng truyền bá những nội dung trái pháp luật.</li>
+              <li>Xin phép người dân, trẻ em trước khi chụp ảnh họ.</li>
+              <li>Không đưa tiền cho trẻ em và người ăn xin.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Tôn trọng sự khác biệt về văn hóa:</strong>
+            <ul>
+              <li>Không cười cợt, chế giễu giọng nói/ngôn ngữ/trang phục/tập quán… của địa phương.</li>
+              <li>Tuân thủ các phong tục tập quán của cộng đồng địa phương.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Giữ gìn sự nguyên vẹn của tự nhiên, của điểm tham quan:</strong>
+            <ul>
+              <li>Vứt rác đúng nơi quy định.</li>
+              <li>Tái sử dụng các vật dụng, túi đựng…</li>
+              <li>Sử dụng các vật dụng cá nhân như bình nước, túi vải. Hạn chế sử dụng đồ nhựa, túi nylon,…</li>
+              <li>Tiết kiệm năng lượng: Sử dụng nước điện vừa đủ, tắt các thiết bị khi rời đi.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Nghiêm túc thực hiện các quy định của nhà nước và địa phương về phòng chống dịch Covid:</strong>
+            <ul>
+              <li>Thực hiện theo quy định 5K của Bộ Y Tế: “Khẩu trang – Khử khuẩn – Khoảng cách – Không tập trung – Khai báo y tế”.</li>
+              <li>Tiêm đủ ít nhất 2 mũi (với người từ 12 tuổi) và gửi kèm chứng nhận (bản chụp giấy xác nhận tiêm hoặc thẻ xanh covid tại ứng dụng PC-Covid).</li>
+              <li>Thực hiện theo các quy định khác của nhà nước và địa phương tại thời điểm áp dụng.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Quyền từ chối TNV:</strong>
+            <p>VEO có quyền từ chối TNV tham gia chuyến đi nếu TNV không có đóng góp vào công việc chung của cả nhóm trong quá trình chuẩn bị trước chuyến đi.</p>
+          </li>
+          <li>
+            <strong>Chứng chỉ tình nguyện:</strong>
+            <p>VEO có quyền không cấp Chứng chỉ tình nguyện đối với TNV vi phạm những quy định trên.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+     <!-- Modal Form -->
+    <div id="registrationModal" class="modal" role="dialog" aria-labelledby="modalTitle">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">🌟 Đăng Ký Tham Gia Tour</h2>
+          <button class="close" aria-label="Đóng form đăng ký">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="registrationForm">
+            <div class="form-group">
+              <label for="name">Họ và tên *</label>
+              <input type="text" id="name" name="name" placeholder="Nhập họ và tên của bạn" required aria-required="true" />
+            </div>
+
+            <div class="form-group">
+              <label for="birthdate">Ngày sinh *</label>
+              <input type="date" id="birthdate" name="birthdate" required aria-required="true" />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Số điện thoại *</label>
+              <input type="tel" id="phone" name="phone" placeholder="Nhập số điện thoại" required aria-required="true" />
+            </div>
+
+            <div class="form-group">
+              <label for="id_card">Số căn cước công dân *</label>
+              <input type="text" id="id_card" name="id_card" placeholder="Nhập số CCCD/CMND" required aria-required="true" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required aria-required="true" />
+            </div>
+
+            <div class="form-group">
+              <label for="trip_name">Tên chuyến đi</label>
+              <input type="text" id="trip_name" name="trip_name" value="Tour du lịch tình nguyện Vân Hồ – Sơn La" readonly aria-readonly="true" />
+            </div>
+
+            <div class="form-group">
+              <label for="departure_date">Ngày khởi hành *</label>
+              <select id="departure_date" name="departure_date" required aria-required="true">
+                <option value="" disabled selected>Chọn ngày khởi hành</option>
+                <option value="2025-04-30">30/04/2025</option>
+                <option value="2025-05-10">10/05/2025</option>
+                <option value="2025-06-28">28/06/2025</option>
+              </select>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn" aria-label="Xác nhận đăng ký tour">✨ Xác nhận đăng ký</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message" role="alert" aria-live="assertive">
+      <h3>🎉 Đăng ký thành công!</h3>
+      <p>Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ sớm nhất!</p>
+    </div>
+  <button class="back-to-home" title="Về trang chủ">Quay lại trang chủ</button>
+  <script>
+          async function saveToDatabase(formData) {
+  try {
+    const now = new Date();
+    const vietnamTime = new Date(now.getTime() + 7 * 60 * 60 * 1000);
+
+    const response = await fetch('http://localhost:3000/api/tour-registrations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        tour_id: "daknong", // ID cho tour Đăk Nông
+        full_name: formData.name,
+        birthdate: formData.birthdate,
+        phone: formData.phone,
+        id_card: formData.id_card,
+        email: formData.email,
+        trip_name: "Tour du lịch Đắk Nông", // Tên tour Đăk Nông
+        departure_date: formData.departure_date,
+        registration_date: vietnamTime.toISOString().split('T')[0],
+        registration_time: vietnamTime.toTimeString().split(' ')[0]
+      })
+    });
+
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'Có lỗi xảy ra');
+    }
+
+    console.log('Đăng ký tour thành công:', data);
+    return true;
+
+  } catch (error) {
+    console.error("Lỗi khi lưu đăng ký:", error);
+    return false;
+  }
+}
+
+      // Modal handling
+      const modal = document.getElementById("registrationModal");
+      const openModalBtn = document.getElementById("openModal");
+      const closeModalBtn = document.querySelector(".close");
+      const registrationForm = document.getElementById("registrationForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const successMessage = document.getElementById("successMessage");
+
+      // Mở modal
+      openModalBtn.addEventListener("click", () => {
+        modal.style.display = "block";
+        document.getElementById("name").focus(); // Focus on first input for accessibility
+      });
+
+      // Đóng modal
+      closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        registrationForm.reset();
+      });
+
+      // Đóng modal khi click bên ngoài
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+          registrationForm.reset();
+        }
+      });
+
+      // Xử lý submit form
+      registrationForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading"></span>Đang xử lý...';
+
+        const formData = {
+          name: document.getElementById("name").value.trim(),
+          birthdate: document.getElementById("birthdate").value,
+          phone: document.getElementById("phone").value.trim(),
+          id_card: document.getElementById("id_card").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          trip_name: document.getElementById("trip_name").value,
+          departure_date: document.getElementById("departure_date").value,
+        };
+
+        // Kiểm tra định dạng email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+          alert("Vui lòng nhập email hợp lệ!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        // Kiểm tra định dạng số điện thoại
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(formData.phone)) {
+          alert("Vui lòng nhập số điện thoại hợp lệ (10 số)!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        // Kiểm tra định dạng CCCD/CMND
+        const idCardRegex = /^\d{9,12}$/;
+        if (!idCardRegex.test(formData.id_card)) {
+          alert("Vui lòng nhập số CCCD/CMND hợp lệ (9-12 số)!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        // Kiểm tra ngày sinh (người tham gia phải từ 5 tuổi trở lên)
+        const birthDate = new Date(formData.birthdate);
+        const today = new Date();
+        const age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age--;
+        }
+        if (age < 5) {
+          alert("Người tham gia phải từ 5 tuổi trở lên!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        // Lưu dữ liệu
+        const saved = saveToDatabase(formData);
+
+        if (saved) {
+          successMessage.style.display = "block";
+          setTimeout(() => {
+            successMessage.style.display = "none";
+            modal.style.display = "none";
+            registrationForm.reset();
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          }, 3000);
+        } else {
+          alert("Có lỗi xảy ra khi lưu dữ liệu!");
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+        }
+      });
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabButtons = document.querySelectorAll('.tab-button');
+      const tabContents = document.querySelectorAll('.tab-content');
+      tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          const tabId = button.getAttribute('data-tab');
+          tabButtons.forEach(btn => btn.classList.remove('active'));
+          tabContents.forEach(content => content.classList.remove('active'));
+          button.classList.add('active');
+          document.getElementById(`${tabId}-content`).classList.add('active');
+        });
+      });
+      if (tabButtons.length > 0) {
+        tabButtons[0].classList.add('active');
+        tabContents[0].classList.add('active');
+      }
+
+      const backToHomeButton = document.querySelector('.back-to-home');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToHomeButton.classList.add('show');
+        } else {
+          backToHomeButton.classList.remove('show');
+        }
+      });
+      backToHomeButton.addEventListener('click', () => {
+        window.location.href = '../header.html';
+      });
+    });
+  </script>
+</body>
+</html>

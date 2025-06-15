@@ -1,0 +1,280 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1600px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.title {
+  font-size: 28px;
+  color: #ff6200;
+  /* Thay #4a148c bằng cam chính */
+  margin-bottom: 30px;
+}
+
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.image-container {
+  flex: 2;
+  border-radius: 13px;
+  overflow: hidden;
+  max-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.tour-image {
+  width: 1200px;
+  height: 400px;
+}
+
+.tour-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.info-card {
+  flex: 1;
+  width: 100%;
+  max-width: 400px;
+  min-width: 400px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  align-self: flex-start;
+}
+
+.info-card h2 {
+  color: #382711;
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.info-item {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.info-label {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.date-selection {
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+}
+
+.date-options {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.date-option {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  min-width: 60px;
+}
+
+.price {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.contact-btn {
+  background-color: #fff;
+  color: #e74c3c;
+  border: 1px solid #ddd;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.contact-btn:hover {
+  background-color: #cc4c00;
+  /* Cam đậm khi hover */
+  color: #fff;
+}
+
+/* ✅ BOOK BUTTON - CHUẨN */
+.book-btn {
+  background-color: #ff6200;
+  /* Thay #4a235a bằng cam chính */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  display: inline-block;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.book-btn:hover {
+  background-color: #ff8533;
+  /* Cam nhạt khi hover */
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.info-card-1 {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 32px;
+  max-width: 920px;
+}
+
+.title-1 {
+  color: #ff6200;
+  /* Thay #6a1b9a bằng cam chính */
+  font-size: 24px;
+  font-weight: bold;
+  margin: 40px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-card-1 ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-card-1 ul li {
+  font-size: 16px;
+  font-weight: 300;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  padding-left: 0;
+}
+
+.info-card-1 p {
+  font-size: 16px;
+  font-weight: 300;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  padding-left: 0;
+}
+
+.info-card-2 {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 32px;
+  max-width: 1060px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.info-card-2 ol {
+  padding-left: 28px;
+  counter-reset: section;
+}
+
+.info-card-2 ol>li {
+  margin-bottom: 16px;
+  font-weight: 600;
+  list-style-type: decimal;
+}
+
+.info-card-2 ol>li>strong {
+  color: #cc4c00;
+  /* Thay #2c3e50 bằng cam đậm */
+  display: block;
+  margin-bottom: 6px;
+}
+
+.info-card-2 ul {
+  padding-left: 24px;
+  list-style-type: disc;
+  margin-top: 6px;
+}
+
+.info-card-2 ul li {
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .image-container,
+  .info-card {
+    flex: 100%;
+    max-width: 100%;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+
+  .info-card {
+    padding: 20px;
+  }
+
+  .title-1 {
+    font-size: 25px;
+    margin: 24px 0 16px;
+  }
+
+  .info-card-1 ul li {
+    font-size: 16px;
+  }
+}

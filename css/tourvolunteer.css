@@ -1,0 +1,222 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f5f5;
+    color: hsl(0, 0%, 20%);
+}
+
+.tv-wrapper {
+    font-family: 'Segoe UI', sans-serif;
+    color: hsl(0, 0%, 20%);
+    background: #f5f5f5;
+    padding: 40px 0;
+    width: 100%;
+}
+
+
+.tv-wrapper h1 {
+    text-align: center;
+    color: #1976D2;
+    font-size: 32px;
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+.tv-wrapper h1::after {
+    content: '';
+    width: 40px;
+    height: 3px;
+    background: #1976D2;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tv-carousel {
+    position: relative;
+    max-width: 1050px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.tv-list {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+    width: fit-content;
+    min-width: 100%;
+}
+
+.tv-card {
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 330px;
+    flex: 0 0 330px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.tv-card:hover {
+    transform: translateY(-8px);
+}
+
+.tv-imgbox {
+    position: relative;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 220px;
+}
+
+.tv-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tv-info {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tv-info h2 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: #1976D2;
+    line-height: 1.4;
+}
+
+.tv-info p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.tv-note {
+    font-size: 12px;
+    color: #777;
+    margin-left: 6px;
+}
+
+.tv-price {
+    color: #d62828;
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.tv-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+
+.tv-btn:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .tv-carousel {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .tv-card {
+        width: 280px;
+        flex: 0 0 280px;
+    }
+
+    .tv-imgbox {
+        height: 180px;
+    }
+}
+
+@media (max-width: 900px) {
+    .tv-card {
+        width: 220px;
+        flex: 0 0 220px;
+    }
+
+    .tv-imgbox {
+        height: 130px;
+    }
+}
+
+@media (max-width: 600px) {
+    .tv-wrapper {
+        padding: 20px 0;
+    }
+
+    .tv-wrapper h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .tv-carousel {
+        padding: 0 2vw;
+    }
+
+    .tv-list {
+        gap: 10px;
+    }
+
+    .tv-card {
+        width: 160px;
+        flex: 0 0 160px;
+    }
+
+    .tv-imgbox {
+        height: 80px;
+        margin: 5px;
+    }
+
+    .tv-info {
+        padding: 8px;
+    }
+
+    .tv-info h2 {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+
+    .tv-info p {
+        font-size: 11px;
+    }
+
+    .tv-price {
+        font-size: 13px;
+        margin-top: 5px;
+    }
+
+    .tv-btn {
+        font-size: 18px;
+        padding: 6px 10px;
+    }
+}

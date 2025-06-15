@@ -1,0 +1,74 @@
+<div id="registrationsList">
+  <h2>Danh sách đăng ký tour</h2>
+  <table id="registrationsTable">
+    <thead>
+      <tr>
+        <th>Tour</th>
+        <th>Họ tên</th>
+        <th>Email</th>
+        <th>SĐT</th>
+        <th>Ngày đi</th>
+        <th>Ngày đăng ký</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+<script>
+  // Hiển thị danh sách đăng ký
+  function displayRegistrations() {
+    const registrations =
+      JSON.parse(localStorage.getItem("tourRegistrations")) || [];
+    const tbody = document.querySelector("#registrationsTable tbody");
+
+    tbody.innerHTML = "";
+
+    registrations.forEach((reg) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+                <td>${reg.tour_id}</td>
+                <td>${reg.full_name}</td>
+                <td>${reg.email}</td>
+                <td>${reg.phone}</td>
+                <td>${reg.departure_date}</td>
+                <td>${reg.registration_date}</td>
+            `;
+      tbody.appendChild(row);
+    });
+  }
+
+  // Gọi hàm hiển thị khi trang load
+  window.addEventListener("load", displayRegistrations);
+</script>
+
+<style>
+  #registrationsList {
+    padding: 20px;
+  }
+
+  #registrationsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  #registrationsTable th,
+  #registrationsTable td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+
+  #registrationsTable th {
+    background-color: #f4f4f4;
+  }
+
+  #registrationsTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  #registrationsTable tr:hover {
+    background-color: #f5f5f5;
+  }
+</style>

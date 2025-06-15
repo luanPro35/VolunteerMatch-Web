@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Tour du lịch tình nguyện Vân Hồ – Sơn La</title>
+    <link rel="stylesheet" href="../css/VânHo.css" />
+    <style>
+      /* Back to Home Button */
+      .back-to-home {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #2e7d32;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: bold;
+        cursor: pointer;
+        display: none;
+        z-index: 1000;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        border: none;
+        text-align: center;
+      }
+
+      .back-to-home:hover {
+        background-color: #4caf50;
+        transform: scale(1.05);
+      }
+
+      .back-to-home.show {
+        display: block;
+      }
+      /* css form đnăg ký */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 0;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: modalSlideIn 0.3s ease-out;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .modal-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 20px 20px 0 0;
+        text-align: center;
+        position: relative;
+      }
+
+      .modal-header h2 {
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .close {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+      }
+
+      .close:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .modal-body {
+        padding: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e1e8ed;
+        border-radius: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+        background-color: #f8f9fa;
+      }
+
+      .form-group input:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 10px rgba(102, 126, 234, 0.2);
+        background-color: white;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 10px;
+      }
+
+      .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .submit-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #ffffff;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .success-message {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #28a745;
+        color: white;
+        padding: 20px 30px;
+        border-radius: 10px;
+        z-index: 1002;
+        display: none;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      @media (max-width: 768px) {
+        .content {
+          grid-template-columns: 1fr;
+          gap: 20px;
+        }
+
+        .title {
+          font-size: 2rem;
+        }
+
+        .action-buttons {
+          flex-direction: column;
+        }
+
+        .contact-btn,
+        .book-btn {
+          width: 100%;
+        }
+
+        .modal-content {
+          margin: 10% auto;
+          width: 95%;
+        }
+
+        .modal-body {
+          padding: 20px;
+        }
+
+        .tour-image img,
+        .image-container img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">Tour du lịch tình nguyện Vân Hồ – Sơn La</h1>
+
+      <!-- Phần ảnh và lịch tour -->
+      <div class="content">
+        <div class="image-container">
+          <div class="tour-image">
+            <img src="../assets/anhdau3.jpg" alt="Tour Vân Hồ – Sơn La" />
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h2>Lịch khởi hành và chi phí</h2>
+
+          <div class="info-item">
+            <span class="info-label">Khởi hành từ:</span> Hà Nội
+          </div>
+
+          <div class="info-item">
+            <span class="info-label">Thời gian:</span> 2 ngày 1 đêm
+          </div>
+
+          <div class="date-selection">Chọn ngày khởi hành:</div>
+
+          <div class="date-options">
+            <div class="date-option">30/04</div>
+            <div class="date-option">10/05</div>
+            <div class="date-option">28/06</div>
+          </div>
+
+          <div class="price">2.090.000 ₫</div>
+
+          <div class="action-buttons">
+            <a
+              href="tel:+123456789"
+              class="contact-btn"
+              aria-label="Liên hệ tư vấn qua điện thoại"
+            >
+              📞 Liên hệ tư vấn
+            </a>
+            <button
+              id="openModal"
+              class="book-btn"
+              aria-label="Đặt chỗ ngay cho tour Vân Hồ"
+            >
+              🔥 Đặt chỗ ngay!
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phần hoạt động tình nguyện -->
+      <h2 class="title-1">💗 Hoạt động tình nguyện nổi bật</h2>
+      <div class="info-card-1">
+        <ul>
+          <li>
+            🌟 Phát triển du lịch cộng đồng tại Chiềng Yên (Vân Hồ, Sơn La)
+          </li>
+          <li>
+            🌟 Trải nghiệm – góp ý nâng cấp homestay, nâng cao dịch vụ địa
+            phương
+          </li>
+          <li>
+            🌟 Tìm hiểu – quảng bá văn hóa Thái trắng: nhà sàn, trang phục,...
+          </li>
+          <li>🌟 Dạy tiếng Anh, kỹ năng sống cho trẻ em vùng cao</li>
+          <li>🌟 Tu sửa cơ sở vật chất, cải tạo cảnh quan địa phương</li>
+        </ul>
+      </div>
+
+      <!-- Phần hoạt động du lịch -->
+      <h2 class="title-1">🏞️ Hoạt động du lịch nổi bật</h2>
+      <div class="info-card-1">
+        <ul>
+          <li>📍 Săn mây cổng trời Hang Kia – khung cảnh cổ tích.</li>
+          <li>📍 Tham quan Thác Tạt Nàng – tuyệt sắc Chiềng Yên.</li>
+          <li>📍 Trải nghiệm vẽ sáp ong, nhuộm chàm trên vải lanh.</li>
+          <li>
+            📍 Thưởng thức đặc sản Thái: thịt nướng mắc khén, nộm rau dớn,...
+          </li>
+          <li>📍 Khám phá văn hóa Mông tại Pà Cò: trang phục, múa khèn,...</li>
+        </ul>
+      </div>
+
+      <!-- Mục tiêu dự án -->
+      <h2 class="title-1">💜 Mục tiêu dự án</h2>
+      <div class="info-card-1">
+        <p>
+          Mục tiêu dự án hướng tới bảo tồn và phát triển bền vững giá trị văn
+          hóa của người dân tộc Thái trắng thông qua các hoạt động hỗ trợ mô
+          hình du lịch cộng đồng và homestay tại Chiềng Yên – Vân Hồ – Sơn La.
+          Thông qua các hoạt động hỗ trợ thiết thực như đào tạo kỹ năng việc
+          làm, dạy học phi chính quy, quảng bá về hình ảnh du lịch cộng đồng tại
+          địa phương, tổ chức các chương trình du lịch trải nghiệm, VOM mong
+          muốn mang lại cơ hội phát triển kinh tế bền vững nhất cho bà con tại
+          đây.
+        </p>
+      </div>
+
+      <!-- Lịch Trình -->
+      <h2 class="title-1">🚌 Lịch trình</h2>
+      <div class="info-card-1">
+        <h3>Ngày 1</h3>
+        <ul>
+          <li>
+            <strong>6h00:</strong> Tập trung cùng đoàn tại C4/142 Giảng Võ, Ba
+            Đình, Hà Nội
+          </li>
+          <li><strong>6h30:</strong> Khởi hành</li>
+          <li>
+            <strong>11h30:</strong> Ăn trưa và nghỉ ngơi tại Chiềng Yên – Vân Hồ
+            – Sơn La
+          </li>
+          <li><strong>13h30:</strong> Tham gia các hoạt động tình nguyện</li>
+        </ul>
+        <div class="image-container">
+          <img
+            src="../assets/anhdau31.jpeg"
+            alt="Hoạt động tình nguyện tại Chiềng Yên"
+            style="width: 100%; border-radius: 13px; margin-top: 5px"
+          />
+        </div>
+
+        <ul>
+          <li style="padding-top: 20px">
+            - <strong>Nhóm dạy học:</strong> Tổ chức lớp học tiếng Anh và kỹ
+            năng sống cho trẻ em
+          </li>
+          <li>
+            - <strong>Nhóm cơ sở:</strong> Triển khai hoạt động tu sửa cơ sở vật
+            chất, cải tạo cảnh quan tại địa phương
+          </li>
+        </ul>
+        <div class="image-container">
+          <img
+            src="../assets/anh32.jpeg"
+            alt="Hoạt động tu sửa cơ sở vật chất"
+            style="width: 100%; border-radius: 15px; padding-top: 5px"
+          />
+        </div>
+
+        <ul>
+          <li style="padding-left: 10px; margin-top: 20px">
+            - <strong>Nhóm Marketing:</strong> Thu thập tư liệu và quảng bá về
+            mô hình du lịch cộng đồng tại Vân Hồ và văn hóa truyền thống dân tộc
+            Thái trắng
+          </li>
+          <li>
+            - <strong>Nhóm Chương trình:</strong> Chuẩn bị chương trình Gala
+            Night giao lưu giữa tình nguyện viên và các em nhỏ, người dân địa
+            phương
+          </li>
+        </ul>
+
+        <ul>
+          <li>
+            <strong>16h30:</strong> Tham quan Thác Tạt Nàng – Thác nước đẹp nhất
+            Chiềng Yên
+          </li>
+        </ul>
+        <div class="image-container">
+          <img
+            src="../assets/anh33.jpg"
+            alt="Thác Tạt Nàng"
+            style="width: 100%; border-radius: 15px; padding-top: 5px"
+          />
+        </div>
+
+        <ul>
+          <li style="margin-top: 20px"><strong>18h30:</strong> Ăn tối</li>
+          <li>
+            <strong>20h00:</strong> Tham gia chương trình Gala Night giao lưu
+            văn nghệ với các em nhỏ và người dân địa phương, tham gia múa sạp và
+            đốt lửa trại
+          </li>
+          <li><strong>22h00:</strong> Nghỉ ngơi</li>
+        </ul>
+
+        <h3>Ngày 2</h3>
+        <ul>
+          <li><strong>4h00:</strong> Thức dậy và di chuyển</li>
+          <li>
+            <strong>7h00:</strong> Săn mây tại cổng trời Hang Kia và chiêm
+            ngưỡng khung cảnh bình yên tựa cổ tích
+          </li>
+        </ul>
+        <div class="image-container">
+          <img
+            src="../assets/anh34.jpg"
+            alt="Cổng trời Hang Kia"
+            style="width: 100%; border-radius: 13px; margin-top: 10px"
+          />
+        </div>
+        <ul>
+          <li style="margin-top: 20px"><strong>8h00:</strong> Ăn sáng</li>
+          <li>
+            <strong>9h00:</strong> Tham gia trải nghiệm vẽ sáp ong nhuộm chàm
+            trên vải lanh
+          </li>
+        </ul>
+        <div class="image-container">
+          <img
+            src="../assets/anh35.jpeg"
+            alt="Trải nghiệm vẽ sáp ong"
+            style="width: 100%; border-radius: 13px; margin-top: 10px"
+          />
+        </div>
+        <ul>
+          <li style="margin-top: 20px">
+            <strong>11h00:</strong> Vui chơi tự do và ăn trưa
+          </li>
+          <li><strong>13h30:</strong> Di chuyển về Hà Nội</li>
+          <li>
+            <strong>18h00:</strong> Về đến điểm tập trung và kết thúc hành trình
+            đáng nhớ!
+          </li>
+        </ul>
+      </div>
+
+      <h2 class="title-1">⭐️ Chi phí dự kiến</h2>
+      <div class="info-card-1">
+        <h2>💡 Lưu ý:</h2>
+        <ul>
+          <li>
+            <strong>- Trẻ từ 5–10 tuổi:</strong> giảm 25% (cần người lớn đi kèm)
+          </li>
+          <li><strong>- Tình nguyện viên quốc tế:</strong> phụ thu 10%</li>
+        </ul>
+        <h2>✅ Chi phí bao gồm:</h2>
+        <ul>
+          <li><strong>- </strong>Xe đưa đón cả hành trình</li>
+          <li><strong>- </strong>Nghỉ tại homestay cộng đồng</li>
+          <li><strong>- </strong>4 bữa chính + 2 bữa phụ</li>
+          <li><strong>- </strong>Nước uống, bảo hiểm du lịch</li>
+          <li>
+            <strong>- </strong>Hoạt động tình nguyện & trải nghiệm văn hóa
+          </li>
+          <li><strong>- </strong>Vé tham quan</li>
+          <li><strong>- </strong>Hỗ trợ từ đội ngũ dẫn đoàn chuyên nghiệp</li>
+        </ul>
+        <h2>❌ Không bao gồm:</h2>
+        <ul>
+          <li><strong>- </strong>Chi tiêu cá nhân</li>
+          <li><strong>- </strong>Đồ ăn/uống ngoài chương trình</li>
+          <li><strong>- </strong>Hóa đơn VAT</li>
+        </ul>
+      </div>
+
+      <h2 class="title-1">📋 Quy Định Chuyến Đi</h2>
+      <div class="info-card-2">
+        <ol>
+          <li>
+            <strong>Tôn trọng và hợp tác với thành viên đoàn:</strong>
+            <ul>
+              <li>Tuân thủ kế hoạch chương trình.</li>
+              <li>Tích cực tham gia hoạt động.</li>
+              <li>Không tách đoàn khi chưa được phép.</li>
+              <li>Cư xử văn minh, hỗ trợ lẫn nhau.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Tôn trọng cộng đồng địa phương:</strong>
+            <ul>
+              <li>Thân thiện, lịch sự với người dân.</li>
+              <li>Tuân thủ pháp luật địa phương.</li>
+              <li>Không gây rối, không truyền bá nội dung trái phép.</li>
+              <li>Xin phép trước khi chụp ảnh.</li>
+              <li>Không cho tiền trẻ em/người ăn xin.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Tôn trọng văn hóa địa phương:</strong>
+            <ul>
+              <li>Không chế giễu ngôn ngữ, trang phục, tập quán.</li>
+              <li>Tuân thủ phong tục bản địa.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Bảo vệ môi trường và điểm đến:</strong>
+            <ul>
+              <li>Vứt rác đúng nơi quy định.</li>
+              <li>Tái sử dụng đồ dùng, hạn chế nhựa.</li>
+              <li>Tiết kiệm điện, nước.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Tuân thủ quy định phòng dịch:</strong>
+            <ul>
+              <li>Thực hiện 5K theo quy định.</li>
+              <li>Tiêm đủ vắc xin và có xác nhận.</li>
+              <li>Tuân thủ quy định tại thời điểm thực hiện.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Quy định về đóng góp:</strong>
+            <ul>
+              <li>VOM có quyền từ chối TNV không tham gia chuẩn bị chung.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Kỷ luật:</strong>
+            <ul>
+              <li>
+                VOM có quyền không cấp chứng chỉ nếu TNV vi phạm quy định.
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Modal Form -->
+    <div
+      id="registrationModal"
+      class="modal"
+      role="dialog"
+      aria-labelledby="modalTitle"
+    >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">🌟 Đăng Ký Tham Gia Tour</h2>
+          <button class="close" aria-label="Đóng form đăng ký">×</button>
+        </div>
+        <div class="modal-body">
+          <form id="registrationForm">
+            <div class="form-group">
+              <label for="name">Họ và tên *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Nhập họ và tên của bạn"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="birthdate">Ngày sinh *</label>
+              <input
+                type="date"
+                id="birthdate"
+                name="birthdate"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Số điện thoại *</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Nhập số điện thoại"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="id_card">Số căn cước công dân *</label>
+              <input
+                type="text"
+                id="id_card"
+                name="id_card"
+                placeholder="Nhập số CCCD/CMND"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Nhập email của bạn"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="trip_name">Tên chuyến đi</label>
+              <input
+                type="text"
+                id="trip_name"
+                name="trip_name"
+                value="Tour du lịch tình nguyện Vân Hồ – Sơn La"
+                readonly
+                aria-readonly="true"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="departure_date">Ngày khởi hành *</label>
+              <select
+                id="departure_date"
+                name="departure_date"
+                required
+                aria-required="true"
+              >
+                <option value="" disabled selected>Chọn ngày khởi hành</option>
+                <option value="2025-04-30">30/04/2025</option>
+                <option value="2025-05-10">10/05/2025</option>
+                <option value="2025-06-28">28/06/2025</option>
+              </select>
+            </div>
+            <button
+              type="submit"
+              class="submit-btn"
+              id="submitBtn"
+              aria-label="Xác nhận đăng ký tour"
+            >
+              ✨ Xác nhận đăng ký
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Success Message -->
+    <div
+      id="successMessage"
+      class="success-message"
+      role="alert"
+      aria-live="assertive"
+    >
+      <h3>🎉 Đăng ký thành công!</h3>
+      <p>Cảm ơn bạn đã đăng ký. Chúng tôi sẽ liên hệ sớm nhất!</p>
+    </div>
+
+    <button
+      class="back-to-home"
+      title="Về trang chủ"
+      aria-label="Quay lại trang chủ"
+    >
+      Quay lại trang chủ
+    </button>
+
+    <script>
+      // Thay thế hàm saveToDatabase trong các file tour (.html)
+      async function saveToDatabase(formData) {
+        try {
+          const response = await fetch('http://localhost:3000/api/tour-registrations', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              tour_id: "van-ho", // Thay đổi theo từng tour
+              full_name: formData.name,
+              birthdate: formData.birthdate,
+              phone: formData.phone,
+              id_card: formData.id_card,
+              email: formData.email,
+              trip_name: "Tour du lịch tình nguyện Vân Hồ – Sơn La", // Thay đổi theo từng tour
+              departure_date: formData.departure_date
+            })
+          });
+
+          const data = await response.json();
+          
+          if (!response.ok) {
+            throw new Error(data.message || 'Có lỗi xảy ra');
+          }
+
+          return true;
+        } catch (error) {
+          console.error("Lỗi khi lưu đăng ký:", error);
+          return false;
+        }
+      }
+
+      // Modal handling
+      const modal = document.getElementById("registrationModal");
+      const openModalBtn = document.getElementById("openModal");
+      const closeModalBtn = document.querySelector(".close");
+      const registrationForm = document.getElementById("registrationForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const successMessage = document.getElementById("successMessage");
+
+      // Mở modal
+      openModalBtn.addEventListener("click", () => {
+        modal.style.display = "block";
+        document.getElementById("name").focus(); // Focus on first input for accessibility
+      });
+
+      // Đóng modal
+      closeModalBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+        registrationForm.reset();
+      });
+
+      // Đóng modal khi click bên ngoài
+      window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+          modal.style.display = "none";
+          registrationForm.reset();
+        }
+      });
+
+      // Xử lý submit form
+      registrationForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="loading"></span>Đang xử lý...';
+
+        const formData = {
+          name: document.getElementById("name").value.trim(),
+          birthdate: document.getElementById("birthdate").value,
+          phone: document.getElementById("phone").value.trim(),
+          id_card: document.getElementById("id_card").value.trim(),
+          email: document.getElementById("email").value.trim(),
+          departure_date: document.getElementById("departure_date").value,
+        };
+
+        // Validate form data
+        if (!validateFormData(formData)) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+          return;
+        }
+
+        try {
+          const saved = await saveToDatabase(formData);
+          if (saved) {
+            showSuccessMessage();
+          } else {
+            throw new Error("Lưu dữ liệu không thành công");
+          }
+        } catch (error) {
+          console.error("Lỗi:", error);
+          alert("Có lỗi xảy ra khi lưu dữ liệu! Vui lòng thử lại.");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "✨ Xác nhận đăng ký";
+        }
+      });
+
+      // Thêm hàm validate riêng
+      function validateFormData(formData) {
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+          alert("Vui lòng nhập email hợp lệ!");
+          return false;
+        }
+
+        // Validate phone
+        const phoneRegex = /^\d{10}$/;
+        if (!phoneRegex.test(formData.phone)) {
+          alert("Vui lòng nhập số điện thoại hợp lệ (10 số)!");
+          return false;
+        }
+
+        // Validate ID card
+        const idCardRegex = /^\d{9,12}$/;
+        if (!idCardRegex.test(formData.id_card)) {
+          alert("Vui lòng nhập số CCCD/CMND hợp lệ (9-12 số)!");
+          return false;
+        }
+
+        // Validate age
+        const birthDate = new Date(formData.birthdate);
+        const today = new Date();
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        if (
+          monthDiff < 0 ||
+          (monthDiff === 0 && today.getDate() < birthDate.getDate())
+        ) {
+          age--;
+        }
+        if (age < 5) {
+          alert("Người tham gia phải từ 5 tuổi trở lên!");
+          return false;
+        }
+
+        return true;
+      }
+
+      // Thêm hàm hiển thị thông báo thành công
+      function showSuccessMessage() {
+        successMessage.style.display = "block";
+        setTimeout(() => {
+          successMessage.style.display = "none";
+          modal.style.display = "none";
+          registrationForm.reset();
+        }, 3000);
+      }
+
+      // Back to home button
+      document.addEventListener("DOMContentLoaded", () => {
+        const backToHomeButton = document.querySelector(".back-to-home");
+        window.addEventListener("scroll", () => {
+          if (window.scrollY > 300) {
+            backToHomeButton.classList.add("show");
+          } else {
+            backToHomeButton.classList.remove("show");
+          }
+        });
+        backToHomeButton.addEventListener("click", () => {
+          window.location.href = "../header.html";
+        });
+      });
+    </script>
+  </body>
+</html>

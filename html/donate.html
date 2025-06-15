@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Hỗ Trợ Ngay - Volunteer Match</title>
+    <link rel="stylesheet" href="../css/donate.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="Main">
+      <!-- Header -->
+      <header id="header">
+        <div class="logo-container">
+          <a href="../header.html" class="logo-nav">
+            <img src="../assets/logo.jpg" alt="Logo" />
+            Volunteer Match
+          </a>
+        </div>
+        <nav class="menu">
+          <a href="../header.html">Trang chủ</a>
+          <a href="vechungtoi.html">Về chúng tôi</a>
+          <a href="hanhtrinh.html">Hành trình</a>
+          <a href="thamgia.html">Tham gia</a>
+          <a href="lienhe.html">Liên hệ</a>
+          <a href="tinmoi.html">Tin mới</a>
+        </nav>
+        <div class="right-section">
+          <a href="login.html" class="login-btn" id="auth-btn">Đăng nhập</a>
+          <a href="donate.html" class="donate-btn">Hỗ trợ ngay</a>
+        </div>
+        <div class="hamburger">
+          <i class="fas fa-bars"></i>
+        </div>
+      </header>
+
+      <!-- Donation Section -->
+      <section
+        id="donate"
+        style="
+          padding: 120px 0;
+          background: linear-gradient(135deg, #e6f4ea 0%, #d1e8d5 100%);
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div class="auth-container">
+          <h2 class="form-title">Hỗ Trợ Ngay</h2>
+          <p
+            style="
+              text-align: center;
+              color: var(--text-dark);
+              margin-bottom: 20px;
+            "
+          >
+            Cảm ơn bạn đã hỗ trợ các hành trình ý nghĩa của chúng tôi! Bạn có
+            thể quyên góp bằng tiền hoặc vật phẩm.
+          </p>
+
+          <!-- Donation Tabs -->
+          <div class="auth-toggle">
+            <button id="monetary-toggle" class="toggle-btn active">
+              Quyên góp tiền
+            </button>
+            <button id="inkind-toggle" class="toggle-btn">
+              Quyên góp vật phẩm
+            </button>
+          </div>
+
+          <!-- Monetary Donation Form -->
+          <div id="monetary-form" class="auth-form active">
+            <form
+              id="monetary-donate-form"
+              onsubmit="return validateMonetaryDonateForm(event)"
+            >
+              <div class="form-group">
+                <label for="monetary-amount">Số Tiền (VND) *</label>
+                <input
+                  type="number"
+                  id="monetary-amount"
+                  name="amount"
+                  placeholder="Nhập số tiền (VD: 100000)"
+                  required
+                  min="10000"
+                />
+              </div>
+              <div class="form-group">
+                <label for="monetary-payment-method"
+                  >Phương Thức Thanh Toán *</label
+                >
+                <select
+                  id="monetary-payment-method"
+                  name="payment-method"
+                  required
+                >
+                  <option value="">Chọn phương thức</option>
+                  <option value="momo">MoMo</option>
+                  <option value="bank">Chuyển khoản ngân hàng</option>
+                  <option value="paypal">PayPal</option>
+                </select>
+              </div>
+
+              <!-- Thêm div để hiển thị QR Momo -->
+              <div id="momo-qr" class="payment-info" style="display: none">
+                <div class="qr-container">
+                  <h3>Quét mã QR MoMo để thanh toán</h3>
+                  <img
+                    src="../assets/qr.jpg"
+                    alt="Mã QR MoMo"
+                    class="qr-code"
+                  />
+                  <p>Quét mã QR bằng ứng dụng MoMo để thanh toán</p>
+                </div>
+              </div>
+
+              <!-- Thêm div để hiển thị QR ngân hàng -->
+              <div id="bank-qr" class="payment-info" style="display: none">
+                <div class="qr-container">
+                  <h3>Thông tin chuyển khoản</h3>
+                  <img
+                    src="../assets/bank-qr.jpg"
+                    alt="Mã QR Ngân hàng"
+                    class="qr-code"
+                  />
+                  <div class="bank-info">
+                    <p><strong>Ngân hàng:</strong> BIDV</p>
+                    <p><strong>Số tài khoản:</strong> 1234567890</p>
+                    <p><strong>Chủ tài khoản:</strong> VOLUNTEER MATCH</p>
+                    <p>
+                      <strong>Nội dung CK:</strong>
+                      <span id="transfer-code"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="auth-btn">Quyên Góp</button>
+            </form>
+            <div id="monetary-donate-message" class="form-message"></div>
+          </div>
+
+          <!-- In-Kind Donation Form -->
+          <div id="inkind-form" class="auth-form">
+            <form
+              id="inkind-donate-form"
+              onsubmit="return validateInKindDonateForm(event)"
+            >
+              <div class="form-group">
+                <label for="inkind-items">Vật Phẩm Quyên Góp *</label>
+                <textarea
+                  id="inkind-items"
+                  name="items"
+                  placeholder="Mô tả vật phẩm (VD: Quần áo, sách vở, đồ dùng học tập...)"
+                  required
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="inkind-province">Tỉnh/Thành Phố *</label>
+                <select id="inkind-province" name="province" required>
+                  <option value="">Chọn tỉnh/thành phố</option>
+                  <option value="An Giang">An Giang</option>
+                  <option value="Bà Rịa - Vũng Tàu">Bà Rịa - Vũng Tàu</option>
+                  <option value="Bắc Giang">Bắc Giang</option>
+                  <option value="Bắc Kạn">Bắc Kạn</option>
+                  <option value="Bạc Liêu">Bạc Liêu</option>
+                  <option value="Bắc Ninh">Bắc Ninh</option>
+                  <option value="Bến Tre">Bến Tre</option>
+                  <option value="Bình Định">Bình Định</option>
+                  <option value="Bình Dương">Bình Dương</option>
+                  <option value="Bình Phước">Bình Phước</option>
+                  <option value="Bình Thuận">Bình Thuận</option>
+                  <option value="Cà Mau">Cà Mau</option>
+                  <option value="Cần Thơ">Cần Thơ</option>
+                  <option value="Cao Bằng">Cao Bằng</option>
+                  <option value="Đà Nẵng">Đà Nẵng</option>
+                  <option value="Đắk Lắk">Đắk Lắk</option>
+                  <option value="Đắk Nông">Đắk Nông</option>
+                  <option value="Điện Biên">Điện Biên</option>
+                  <option value="Đồng Nai">Đồng Nai</option>
+                  <option value="Đồng Tháp">Đồng Tháp</option>
+                  <option value="Gia Lai">Gia Lai</option>
+                  <option value="Hà Giang">Hà Giang</option>
+                  <option value="Hà Nam">Hà Nam</option>
+                  <option value="Hà Nội">Hà Nội</option>
+                  <option value="Hà Tĩnh">Hà Tĩnh</option>
+                  <option value="Hải Dương">Hải Dương</option>
+                  <option value="Hải Phòng">Hải Phòng</option>
+                  <option value="Hậu Giang">Hậu Giang</option>
+                  <option value="Hòa Bình">Hòa Bình</option>
+                  <option value="Hưng Yên">Hưng Yên</option>
+                  <option value="Khánh Hòa">Khánh Hòa</option>
+                  <option value="Kiên Giang">Kiên Giang</option>
+                  <option value="Kon Tum">Kon Tum</option>
+                  <option value="Lai Châu">Lai Châu</option>
+                  <option value="Lâm Đồng">Lâm Đồng</option>
+                  <option value="Lạng Sơn">Lạng Sơn</option>
+                  <option value="Lào Cai">Lào Cai</option>
+                  <option value="Long An">Long An</option>
+                  <option value="Nam Định">Nam Định</option>
+                  <option value="Nghệ An">Nghệ An</option>
+                  <option value="Ninh Bình">Ninh Bình</option>
+                  <option value="Ninh Thuận">Ninh Thuận</option>
+                  <option value="Phú Thọ">Phú Thọ</option>
+                  <option value="Phú Yên">Phú Yên</option>
+                  <option value="Quảng Bình">Quảng Bình</option>
+                  <option value="Quảng Nam">Quảng Nam</option>
+                  <option value="Quảng Ngãi">Quảng Ngãi</option>
+                  <option value="Quảng Ninh">Quảng Ninh</option>
+                  <option value="Quảng Trị">Quảng Trị</option>
+                  <option value="Sóc Trăng">Sóc Trăng</option>
+                  <option value="Sơn La">Sơn La</option>
+                  <option value="Tây Ninh">Tây Ninh</option>
+                  <option value="Thái Bình">Thái Bình</option>
+                  <option value="Thái Nguyên">Thái Nguyên</option>
+                  <option value="Thanh Hóa">Thanh Hóa</option>
+                  <option value="Thừa Thiên Huế">Thừa Thiên Huế</option>
+                  <option value="Tiền Giang">Tiền Giang</option>
+                  <option value="TP. Hồ Chí Minh">TP. Hồ Chí Minh</option>
+                  <option value="Trà Vinh">Trà Vinh</option>
+                  <option value="Tuyên Quang">Tuyên Quang</option>
+                  <option value="Vĩnh Long">Vĩnh Long</option>
+                  <option value="Vĩnh Phúc">Vĩnh Phúc</option>
+                  <option value="Yên Bái">Yên Bái</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="inkind-address">Địa Chỉ Cụ Thể *</label>
+                <input
+                  type="text"
+                  id="inkind-address"
+                  name="address"
+                  placeholder="Số nhà, tên đường, phường/xã, quận/huyện"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="inkind-contact">Thông Tin Liên Hệ *</label>
+                <input
+                  type="text"
+                  id="inkind-contact"
+                  name="contact"
+                  placeholder="Số điện thoại hoặc email"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="inkind-delivery">Phương Thức Gửi *</label>
+                <select id="inkind-delivery" name="delivery-method" required>
+                  <option value="">Chọn phương thức</option>
+                  <option value="dropoff">Mang đến địa điểm</option>
+                  <option value="pickup">Chúng tôi đến lấy</option>
+                  <option value="ship">Gửi qua bưu điện</option>
+                </select>
+              </div>
+              <button type="submit" class="auth-btn">Gửi Thông Tin</button>
+            </form>
+            <div id="inkind-donate-message" class="form-message"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" title="Back to Top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="../js/donate.js"></script>
+    <script src="../js/login.js"></script>
+  </body>
+</html>

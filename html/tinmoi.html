@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Tin Mới - Volunteer Match</title>
+    <link rel="stylesheet" href="../css/header.css" />
+    <link rel="stylesheet" href="../css/footer.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+          "Segoe UI Symbol";
+        --color-background: #f8f9fa; /* Slightly lighter */
+        --color-surface: #ffffff;
+        --color-text-primary: #212529; /* Darker, more modern text */
+        --color-text-secondary: #495057;
+        --color-text-muted: #6c757d;
+        --color-accent: #667eea;
+        --color-accent-rgb: 102, 126, 234; /* RGB components for --color-accent */
+        --color-accent-dark: #5a67d8;
+        --color-border-subtle: #e9ecef; /* New variable for subtle borders */
+
+        --border-radius-sm: 4px;
+        --border-radius-md: 8px;
+        --border-radius-lg: 12px;
+
+        --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.075);
+        --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.12);
+
+        --spacing-xs: 4px;
+        --spacing-sm: 8px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
+      }
+
+      body {
+        font-family: var(--font-primary);
+        margin: 0;
+        padding: 0;
+        background-color: var(--color-background);
+        color: var(--color-text-primary);
+        line-height: 1.6; /* Improved base line-height */
+      }
+
+      .news-container {
+        max-width: 1200px;
+        margin: var(--spacing-lg) auto;
+        padding: var(--spacing-lg);
+        background-color: var(--color-surface);
+        border-radius: var(--border-radius-lg); /* Larger radius */
+        box-shadow: var(--shadow-md);
+        margin-top: 120px; /* Ensure this doesn't conflict with header height if header is fixed */
+      }
+
+      .news-container h1 {
+        text-align: center;
+        color: var(--color-text-primary);
+        margin-top: 0;
+        margin-bottom: var(--spacing-xl); /* Increased bottom margin */
+        font-size: 2.6em; /* Slightly adjusted */
+        font-weight: 700; /* Bolder */
+        position: relative;
+        padding-bottom: var(--spacing-md);
+      }
+
+      .news-container h1::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 0;
+        width: 80px;
+        height: 4px; /* Thicker underline */
+        background-color: var(--color-accent);
+        border-radius: 2px; /* Rounded underline */
+      }
+
+      .news-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+      }
+
+      .news-card {
+        background-color: var(--color-surface);
+        border-radius: var(--border-radius-md);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid var(--color-border-subtle); /* Use variable */
+      }
+
+      .news-card:hover {
+        transform: translateY(-6px); /* Slightly more lift */
+        box-shadow: var(--shadow-lg); /* More pronounced shadow */
+      }
+
+      .news-image {
+        width: 100%;
+        height: 220px; /* Slightly taller image */
+        object-fit: cover;
+        border-bottom: 1px solid var(--color-border-subtle); /* Use variable */
+      }
+
+      .news-content {
+        padding: var(--spacing-lg);
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .news-title {
+        font-size: 1.5em; /* Slightly larger */
+        font-weight: 600; /* Bolder */
+        color: var(--color-text-primary);
+        margin-top: 0;
+        margin-bottom: var(--spacing-sm);
+        line-height: 1.3; /* Tighter for titles */
+      }
+
+      .news-meta {
+        font-size: 0.875em; /* Standardized size */
+        color: var(--color-text-muted);
+        margin-bottom: var(--spacing-md);
+        display: flex; /* For better alignment */
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .news-meta span {
+        margin-right: var(--spacing-sm);
+        display: inline-flex; /* Align icon and text within span */
+        align-items: center;
+      }
+      .news-meta span i {
+        margin-right: var(--spacing-xs);
+        color: var(--color-text-muted); /* Ensure icon color matches */
+      }
+
+      .news-excerpt {
+        font-size: 0.95em;
+        line-height: 1.7; /* More generous for body text */
+        color: var(--color-text-secondary);
+        flex-grow: 1;
+        margin-bottom: var(--spacing-md);
+      }
+
+      .news-readmore {
+        display: inline-block;
+        padding: 10px 18px; /* Adjusted padding */
+        background-color: var(--color-accent);
+        color: white;
+        text-decoration: none;
+        border-radius: var(--border-radius-sm);
+        text-align: center;
+        transition: background-color 0.2s ease, transform 0.2s ease,
+          box-shadow 0.2s ease;
+        margin-top: auto;
+        font-weight: 500; /* Medium weight */
+        align-self: flex-start; /* Align to start if container is wider */
+      }
+
+      .news-readmore:hover,
+      .news-readmore:focus {
+        background-color: var(--color-accent-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(var(--color-accent-rgb), 0.3); /* Use RGB variable */
+        outline: none;
+      }
+      .news-readmore i {
+        margin-left: var(--spacing-xs);
+        transition: transform 0.2s ease;
+      }
+      .news-readmore:hover i {
+        transform: translateX(3px); /* Subtle arrow movement */
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .news-grid {
+          grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+          gap: var(--spacing-md);
+        }
+        .news-container h1 {
+          font-size: 2.2em;
+        }
+        .news-title {
+          font-size: 1.3em;
+        }
+      }
+      @media (max-width: 480px) {
+        .news-grid {
+          grid-template-columns: 1fr; /* Single column on very small screens */
+        }
+        .news-container h1 {
+          font-size: 2em;
+          padding-bottom: var(--spacing-sm);
+        }
+        .news-container h1::after {
+          width: 60px;
+          height: 3px;
+        }
+        .news-content {
+          padding: var(--spacing-md);
+        }
+        .news-title {
+          font-size: 1.2em;
+        }
+        .news-excerpt {
+          font-size: 0.9em;
+        }
+        .news-readmore {
+          padding: 8px 15px;
+          font-size: 0.95em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header (Bạn có thể copy từ file header.html hoặc dùng JavaScript để chèn) -->
+    <header id="header">
+      <!-- Nội dung header của bạn -->
+    </header>
+
+    <main class="news-container">
+      <h1>Tin Mới Được Duyệt</h1>
+      <div class="news-grid" id="news-grid-content">
+        <!-- Ví dụ một card bài đăng -->
+        <!-- Dữ liệu thực tế sẽ được tải và chèn vào đây bằng JavaScript -->
+        <!--
+            <article class="news-card">
+                <img src="../assets/anh1.jpg" alt="Tiêu đề bài đăng mẫu" class="news-image">
+                <div class="news-content">
+                    <h2 class="news-title">Tiêu đề bài đăng mẫu rất hấp dẫn và thu hút người đọc</h2>
+                    <p class="news-meta">
+                        <span class="news-author"><i class="fas fa-user"></i> Người đăng: Admin</span> |
+                        <span class="news-date"><i class="fas fa-calendar-alt"></i> Ngày đăng: 25/07/2024</span>
+                    </p>
+                    <p class="news-excerpt">Đây là một đoạn mô tả ngắn gọn về nội dung của bài đăng. Nó cung cấp một cái nhìn tổng quan để người đọc quyết định có muốn xem chi tiết hay không...</p>
+                    <a href="#" class="news-readmore">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </article>
+            -->
+      </div>
+    </main>
+
+    <script>
+      // JavaScript để tải header và footer (ví dụ)
+      async function loadComponent(url, elementId) {
+        try {
+          const response = await fetch(url); // url là '../header.html'
+          const text = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, "text/html");
+          let componentNode;
+
+          // Chỉ tải header
+          if (elementId === "header")
+            componentNode = doc.querySelector("header");
+
+          if (componentNode) {
+            // Điều chỉnh đường dẫn tương đối cho các liên kết và hình ảnh
+            // Giả định:
+            // - tinmoi.html nằm trong thư mục /html/
+            // - header.html (file nguồn) nằm ở thư mục gốc (../ so với tinmoi.html)
+            // - Các đường dẫn trong header.html là tương đối với vị trí của nó (gốc)
+            //   Ví dụ: href="./html/vechungtoi.html", src="./assets/logo.jpg"
+
+            const basePathFromTinMoiToRoot = "../"; // Từ html/tinmoi.html đi lên thư mục gốc
+
+            componentNode.querySelectorAll("a[href]").forEach((link) => {
+              let href = link.getAttribute("href");
+              if (
+                href &&
+                !href.startsWith("http") &&
+                !href.startsWith("#") &&
+                !href.startsWith("mailto:") &&
+                !href.startsWith("tel:") &&
+                !href.startsWith("/")
+              ) {
+                if (href.startsWith("./html/")) {
+                  // Ví dụ: "./html/vechungtoi.html" trong header.html -> thành "vechungtoi.html" cho tinmoi.html
+                  link.setAttribute("href", href.substring(7));
+                } else if (href.startsWith("html/")) {
+                  // Nếu header.html dùng "html/vechungtoi.html"
+                  link.setAttribute("href", href.substring(5));
+                } else if (href.startsWith("./")) {
+                  // Ví dụ: "./header.html" hoặc "./assets/..."
+                  link.setAttribute(
+                    "href",
+                    basePathFromTinMoiToRoot + href.substring(2)
+                  );
+                } else if (!href.includes("/")) {
+                  // Ví dụ: "header.html"
+                  link.setAttribute("href", basePathFromTinMoiToRoot + href);
+                }
+              }
+            });
+
+            componentNode.querySelectorAll("img[src]").forEach((img) => {
+              let src = img.getAttribute("src");
+              if (
+                src &&
+                !src.startsWith("http") &&
+                !src.startsWith("/") &&
+                !src.startsWith("data:")
+              ) {
+                if (src.startsWith("./assets/")) {
+                  img.setAttribute(
+                    "src",
+                    basePathFromTinMoiToRoot + src.substring(2)
+                  );
+                } else if (src.startsWith("assets/")) {
+                  img.setAttribute("src", basePathFromTinMoiToRoot + src);
+                }
+              }
+            });
+
+            const targetElement = document.getElementById(elementId);
+            if (targetElement) {
+              targetElement.replaceWith(componentNode);
+            }
+
+            // Khởi tạo lại các chức năng của header nếu cần
+            if (elementId === "header" && componentNode.tagName === "HEADER") {
+              initializeHeaderFunctions(componentNode);
+            }
+          }
+        } catch (error) {
+          console.error(`Error loading ${elementId}:`, error);
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadComponent("../header.html", "header"); // Đường dẫn tới file header.html của bạn
+
+        // TODO: Viết JavaScript để fetch các bài đăng đã duyệt từ API
+        // và chèn chúng vào div#news-grid-content
+        // Ví dụ:
+        fetchApprovedPostsAndRender();
+      });
+
+      function initializeHeaderFunctions(headerElement) {
+        // Hamburger menu
+        const hamburger = headerElement.querySelector(".hamburger");
+        const menu = headerElement.querySelector(".menu");
+        if (hamburger && menu) {
+          hamburger.addEventListener("click", function (e) {
+            e.stopPropagation(); // Ngăn sự kiện click lan ra document
+            menu.classList.toggle("active");
+          });
+          // Optional: Close menu when clicking outside
+          document.addEventListener("click", function (event) {
+            if (
+              !menu.contains(event.target) &&
+              !hamburger.contains(event.target)
+            ) {
+              menu.classList.remove("active");
+            }
+          });
+        }
+
+        // Auth button (Login/Logout)
+        const authBtn = headerElement.querySelector("#auth-btn");
+        if (authBtn) {
+          const userDataString = localStorage.getItem("user");
+          let userData = null;
+          if (userDataString) {
+            try {
+              userData = JSON.parse(userDataString);
+            } catch (e) {
+              console.error(
+                "Lỗi phân tích dữ liệu người dùng từ localStorage:",
+                e
+              );
+              localStorage.removeItem("user"); // Xóa dữ liệu lỗi
+            }
+          }
+
+          if (userData && userData.token) {
+            let userWelcomeMessage = headerElement.querySelector(
+              "#user-welcome-message"
+            );
+            if (!userWelcomeMessage) {
+              userWelcomeMessage = document.createElement("span");
+              userWelcomeMessage.id = "user-welcome-message"; // ID này có thể cần duy nhất nếu có nhiều header
+              userWelcomeMessage.style.marginRight = "15px";
+              userWelcomeMessage.style.color = "#333";
+              // Chèn trước nút authBtn
+              if (authBtn.parentNode) {
+                authBtn.parentNode.insertBefore(userWelcomeMessage, authBtn);
+              }
+            }
+            userWelcomeMessage.textContent = `Xin chào, ${userData.name}!`;
+            authBtn.textContent = "Đăng xuất";
+            authBtn.href = "#";
+            authBtn.onclick = (e) => {
+              e.preventDefault();
+              localStorage.removeItem("user");
+              alert("Bạn đã đăng xuất.");
+              window.location.href = "../header.html"; // Chuyển về trang chủ sau khi đăng xuất
+            };
+          } else {
+            let userWelcomeMessage = headerElement.querySelector(
+              "#user-welcome-message"
+            );
+            if (userWelcomeMessage) userWelcomeMessage.remove();
+            authBtn.textContent = "Đăng nhập";
+            // Đường dẫn đến login.html từ html/tinmoi.html là "login.html"
+            // Nếu header.html (ở gốc) có link là "./html/login.html",
+            // logic sửa đường dẫn trong loadComponent sẽ đổi thành "login.html"
+            // authBtn.href = "login.html"; // Đã được sửa bởi logic path correction
+            if (
+              !authBtn.getAttribute("href") ||
+              authBtn.getAttribute("href") === "#"
+            ) {
+              authBtn.href = "login.html";
+            }
+            authBtn.onclick = null;
+          }
+        }
+      }
+
+      function fetchApprovedPostsAndRender() {
+        const newsGrid = document.getElementById("news-grid-content");
+        if (!newsGrid) {
+          console.error(
+            "Không tìm thấy phần tử #news-grid-content để hiển thị tin tức."
+          );
+          return;
+        }
+
+        newsGrid.innerHTML =
+          '<p style="text-align:center; padding: 20px;">Đang tải tin tức...</p>';
+        console.log("Bắt đầu fetchApprovedPostsAndRender...");
+
+        fetch("http://localhost:3000/api/public/approved-aid-posts")
+          .then((response) => {
+            console.log(
+              "Trạng thái phản hồi từ API /api/public/approved-aid-posts:",
+              response.status
+            );
+            if (!response.ok) {
+              throw new Error(
+                `Lỗi API: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.json();
+          })
+          .then((posts) => {
+            console.log("Dữ liệu bài đăng nhận được từ API:", posts);
+            newsGrid.innerHTML = ""; // Xóa nội dung "Đang tải..."
+            if (!posts || posts.length === 0) {
+              newsGrid.innerHTML =
+                '<p style="text-align:center; padding: 20px;">Chưa có tin mới nào được duyệt.</p>';
+              console.log(
+                "Không có bài đăng nào được duyệt hoặc API trả về mảng rỗng."
+              );
+              return;
+            }
+            posts.forEach((post) => {
+              let imageUrl = "../assets/placeholder.jpg"; // Ảnh mặc định
+              if (post.image_paths) {
+                const firstImage = post.image_paths.split(",")[0].trim();
+                if (firstImage) {
+                  imageUrl = `http://localhost:3000${
+                    firstImage.startsWith("/") ? firstImage : "/" + firstImage
+                  }`;
+                }
+              }
+              console.log(`Đang render bài: "${post.title}", ảnh: ${imageUrl}`);
+
+              const postElement = `
+                            <article class="news-card">
+                                <img src="${imageUrl}" alt="${
+                post.title || "Hình ảnh bài đăng"
+              }" class="news-image" onerror="this.onerror=null;this.src='../assets/placeholder.jpg';">
+                                <div class="news-content">
+                                    <h2 class="news-title">${
+                                      post.title || "Không có tiêu đề"
+                                    }</h2>
+                                    <p class="news-meta">
+                                        <span class="news-author"><i class="fas fa-user"></i> ${
+                                          post.author_name || "Ẩn danh"
+                                        }</span> |
+                                        <span class="news-date"><i class="fas fa-calendar-alt"></i> ${new Date(
+                                          post.created_at
+                                        ).toLocaleDateString("vi-VN")}</span>
+                                    </p>
+                                    <p class="news-excerpt">${truncateText(
+                                      post.content,
+                                      150
+                                    )}</p>
+                                    <a href="chitiettin.html?id=${
+                                      post.id
+                                    }" class="news-readmore">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </article>
+                        `;
+              newsGrid.insertAdjacentHTML("beforeend", postElement);
+            });
+          })
+          .catch((error) => {
+            console.error(
+              "Lỗi trong quá trình fetchApprovedPostsAndRender:",
+              error
+            );
+            newsGrid.innerHTML = `<p style="text-align:center; padding: 20px; color: red;">Lỗi tải tin tức: ${error.message}. Vui lòng thử lại sau.</p>`;
+          });
+
+        function truncateText(text, maxLength) {
+          // Hàm này có thể cần nếu bạn dùng ở trên
+          if (text && text.length > maxLength) {
+            return text.substring(0, maxLength) + "...";
+          }
+          return text || "";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.jpg" />
+    <title>Chi Tiết Tin Tức - Volunteer Match</title>
+    <link rel="stylesheet" href="../css/header.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f7f6;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .post-detail-container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-top: 120px; /* Để không bị header che */
+      }
+
+      #post-title-detail {
+        font-size: 2.5em;
+        color: #2c3e50;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+        line-height: 1.3;
+      }
+
+      #post-meta-detail {
+        font-size: 0.9em;
+        color: #7f8c8d;
+        margin-bottom: 25px;
+      }
+
+      #post-meta-detail .author,
+      #post-meta-detail .date {
+        margin-right: 15px;
+      }
+
+      #post-images-detail {
+        margin-bottom: 25px;
+        text-align: center; /* Căn giữa ảnh nếu chỉ có 1 ảnh */
+      }
+
+      #post-images-detail img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+      }
+      #post-images-detail img:hover {
+        transform: scale(1.02);
+      }
+
+      #post-content-detail {
+        font-size: 1.1em;
+        color: #34495e;
+        white-space: pre-wrap; /* Giữ nguyên định dạng xuống dòng và khoảng trắng */
+        word-wrap: break-word;
+      }
+
+      .loading-message,
+      .error-message {
+        text-align: center;
+        font-size: 1.2em;
+        padding: 40px 20px;
+        color: #555;
+      }
+      .error-message {
+        color: #e74c3c;
+      }
+
+      .back-to-news {
+        display: inline-block;
+        margin-top: 30px;
+        padding: 10px 20px;
+        background-color: #667eea;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+      }
+      .back-to-news:hover {
+        background-color: #5a67d8;
+      }
+
+      @media (max-width: 768px) {
+        .post-detail-container {
+          margin: 90px auto 20px;
+          padding: 20px;
+        }
+        #post-title-detail {
+          font-size: 2em;
+        }
+        #post-content-detail {
+          font-size: 1em;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header id="header">
+      <!-- Nội dung header sẽ được tải vào đây -->
+    </header>
+
+    <main class="post-detail-container">
+      <article id="post-article-content">
+        <h1 id="post-title-detail">Đang tải tiêu đề...</h1>
+        <p id="post-meta-detail">
+          <span class="author"
+            ><i class="fas fa-user"></i> Đang tải tác giả...</span
+          >
+          <span class="date"
+            ><i class="fas fa-calendar-alt"></i> Đang tải ngày đăng...</span
+          >
+        </p>
+        <div id="post-images-detail">
+          <!-- Hình ảnh sẽ được chèn vào đây -->
+        </div>
+        <div id="post-content-detail">
+          <p class="loading-message">Đang tải nội dung...</p>
+        </div>
+        <a href="tinmoi.html" class="back-to-news"
+          ><i class="fas fa-arrow-left"></i> Quay lại Tin Mới</a
+        >
+      </article>
+    </main>
+
+    <script>
+      async function loadComponent(url, elementId) {
+        try {
+          const response = await fetch(url);
+          const text = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(text, "text/html");
+          let componentNode;
+          if (elementId === "header")
+            componentNode = doc.querySelector("header");
+
+          if (componentNode) {
+            const basePathFromTinMoiToRoot = "../";
+            componentNode.querySelectorAll("a[href]").forEach((link) => {
+              let href = link.getAttribute("href");
+              if (
+                href &&
+                !href.startsWith("http") &&
+                !href.startsWith("#") &&
+                !href.startsWith("mailto:") &&
+                !href.startsWith("tel:") &&
+                !href.startsWith("/")
+              ) {
+                if (href.startsWith("./html/"))
+                  link.setAttribute("href", href.substring(7));
+                else if (href.startsWith("html/"))
+                  link.setAttribute("href", href.substring(5));
+                else if (href.startsWith("./"))
+                  link.setAttribute(
+                    "href",
+                    basePathFromTinMoiToRoot + href.substring(2)
+                  );
+                else if (!href.includes("/"))
+                  link.setAttribute("href", basePathFromTinMoiToRoot + href);
+              }
+            });
+            componentNode.querySelectorAll("img[src]").forEach((img) => {
+              let src = img.getAttribute("src");
+              if (
+                src &&
+                !src.startsWith("http") &&
+                !src.startsWith("/") &&
+                !src.startsWith("data:")
+              ) {
+                if (src.startsWith("./assets/"))
+                  img.setAttribute(
+                    "src",
+                    basePathFromTinMoiToRoot + src.substring(2)
+                  );
+                else if (src.startsWith("assets/"))
+                  img.setAttribute("src", basePathFromTinMoiToRoot + src);
+              }
+            });
+            const targetElement = document.getElementById(elementId);
+            if (targetElement) targetElement.replaceWith(componentNode);
+            if (elementId === "header" && componentNode.tagName === "HEADER")
+              initializeHeaderFunctions(componentNode);
+          }
+        } catch (error) {
+          console.error(`Error loading ${elementId}:`, error);
+        }
+      }
+
+      function initializeHeaderFunctions(headerElement) {
+        const hamburger = headerElement.querySelector(".hamburger");
+        const menu = headerElement.querySelector(".menu");
+        if (hamburger && menu) {
+          hamburger.addEventListener("click", function (e) {
+            e.stopPropagation();
+            menu.classList.toggle("active");
+          });
+          document.addEventListener("click", function (event) {
+            if (
+              !menu.contains(event.target) &&
+              !hamburger.contains(event.target)
+            )
+              menu.classList.remove("active");
+          });
+        }
+        const authBtn = headerElement.querySelector("#auth-btn");
+        if (authBtn) {
+          const userDataString = localStorage.getItem("user");
+          let userData = null;
+          if (userDataString) {
+            try {
+              userData = JSON.parse(userDataString);
+            } catch (e) {
+              console.error("Lỗi phân tích user data:", e);
+              localStorage.removeItem("user");
+            }
+          }
+          if (userData && userData.token) {
+            let userWelcomeMessage = headerElement.querySelector(
+              "#user-welcome-message"
+            );
+            if (!userWelcomeMessage) {
+              userWelcomeMessage = document.createElement("span");
+              userWelcomeMessage.id = "user-welcome-message";
+              userWelcomeMessage.style.marginRight = "15px";
+              userWelcomeMessage.style.color = "#333";
+              if (authBtn.parentNode)
+                authBtn.parentNode.insertBefore(userWelcomeMessage, authBtn);
+            }
+            userWelcomeMessage.textContent = `Xin chào, ${userData.name}!`;
+            authBtn.textContent = "Đăng xuất";
+            authBtn.href = "#";
+            authBtn.onclick = (e) => {
+              e.preventDefault();
+              localStorage.removeItem("user");
+              alert("Bạn đã đăng xuất.");
+              window.location.href = "../header.html";
+            };
+          } else {
+            let userWelcomeMessage = headerElement.querySelector(
+              "#user-welcome-message"
+            );
+            if (userWelcomeMessage) userWelcomeMessage.remove();
+            authBtn.textContent = "Đăng nhập";
+            if (
+              !authBtn.getAttribute("href") ||
+              authBtn.getAttribute("href") === "#"
+            )
+              authBtn.href = "login.html";
+            authBtn.onclick = null;
+          }
+        }
+      }
+
+      async function fetchPostDetailsAndRender() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get("id");
+
+        const titleEl = document.getElementById("post-title-detail");
+        const metaEl = document.getElementById("post-meta-detail");
+        const contentEl = document.getElementById("post-content-detail");
+        const imagesEl = document.getElementById("post-images-detail");
+        const articleEl = document.getElementById("post-article-content");
+
+        if (!postId) {
+          articleEl.innerHTML =
+            '<p class="error-message">Không tìm thấy ID bài viết.</p> <a href="tinmoi.html" class="back-to-news"><i class="fas fa-arrow-left"></i> Quay lại Tin Mới</a>';
+          document.title = "Lỗi - Volunteer Match";
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            `http://localhost:3000/api/public/aid-posts/${postId}`
+          );
+          if (!response.ok) {
+            const errorData = await response
+              .json()
+              .catch(() => ({ message: `Lỗi ${response.status}` }));
+            throw new Error(errorData.message || `Không thể tải bài viết.`);
+          }
+          const post = await response.json();
+
+          document.title = `${post.title || "Chi tiết tin"} - Volunteer Match`;
+          titleEl.textContent = post.title || "Không có tiêu đề";
+          metaEl.innerHTML = `
+                    <span class="author"><i class="fas fa-user"></i> ${
+                      post.author_name || "Ẩn danh"
+                    }</span>
+                    <span class="date"><i class="fas fa-calendar-alt"></i> ${new Date(
+                      post.created_at
+                    ).toLocaleDateString("vi-VN")}</span>
+                `;
+          contentEl.textContent = post.content || "Không có nội dung.";
+
+          imagesEl.innerHTML = ""; // Xóa ảnh cũ/placeholder
+          if (post.image_paths) {
+            const imagePathsArray = post.image_paths.split(",");
+            imagePathsArray.forEach((path) => {
+              if (path.trim()) {
+                const img = document.createElement("img");
+                const imagePath = path.trim();
+                img.src = `http://localhost:3000${
+                  imagePath.startsWith("/") ? imagePath : "/" + imagePath
+                }`;
+                img.alt = post.title || "Hình ảnh bài đăng";
+                img.onerror = function () {
+                  this.onerror = null;
+                  this.src = "../assets/placeholder.jpg";
+                  this.alt = "Ảnh bị lỗi hoặc không tìm thấy";
+                };
+                img.onclick = () => window.open(img.src, "_blank");
+                imagesEl.appendChild(img);
+              }
+            });
+          }
+          if (imagesEl.children.length === 0) {
+            imagesEl.innerHTML =
+              '<p style="font-style: italic; color: #777;">Không có hình ảnh cho bài viết này.</p>';
+          }
+        } catch (error) {
+          console.error("Lỗi tải chi tiết bài viết:", error);
+          articleEl.innerHTML = `<p class="error-message">Lỗi: ${error.message}</p> <a href="tinmoi.html" class="back-to-news"><i class="fas fa-arrow-left"></i> Quay lại Tin Mới</a>`;
+          document.title = "Lỗi tải bài viết - Volunteer Match";
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        loadComponent("../header.html", "header");
+        fetchPostDetailsAndRender();
+      });
+    </script>
+  </body>
+</html>

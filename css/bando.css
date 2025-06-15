@@ -1,0 +1,487 @@
+body {
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- Style cho các tỉnh trên bản đồ --- */
+path {
+    fill: #1976D2;
+    /* Màu xanh ngọc */
+    stroke: black;
+    stroke-width: 0.3;
+    /* Giảm độ dày đường viền cho gọn */
+    transition: fill 0.3s ease, opacity 0.3s ease;
+}
+
+path:hover {
+    fill: orange;
+    cursor: pointer;
+}
+
+/* Tô màu cam cho các miền hoặc tỉnh khi được chọn */
+.bac,
+.trung,
+.nam,
+.highlight {
+    fill: orange !important;
+}
+
+/* --- Bố cục bản đồ --- */
+svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Container bản đồ */
+#map {
+    position: relative;
+    height: auto;
+    min-height: 400px;
+    /* Tăng chiều cao tối thiểu để bản đồ rõ ràng hơn */
+}
+
+/* --- Tooltip --- */
+.tooltip {
+    position: absolute;
+    display: none;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 4px 8px;
+    /* Giảm padding để tooltip nhỏ gọn hơn */
+    border-radius: 4px;
+    pointer-events: none;
+    font-size: 12px;
+    /* Giảm font size */
+    z-index: 1000;
+    white-space: nowrap;
+}
+
+.tooltip.show {
+    display: block;
+    opacity: 1;
+}
+
+/* --- Tạo container bao ngoài bản đồ và family-list --- */
+.container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    /* Giảm khoảng cách giữa bản đồ và danh sách */
+    max-width: 1250px;
+    /* Thu gọn chiều rộng container */
+    margin: 20px auto;
+    padding: 10px;
+}
+
+/* Chiếm không gian hợp lý cho bản đồ */
+#map {
+    flex: 1 1 500px;
+    /* Thu gọn chiều rộng tối đa của bản đồ */
+    max-width: 500px;
+    /* Giới hạn chiều rộng */
+    margin: 0;
+}
+
+.island {
+    display: block;
+}
+
+.flag {
+    display: flex;
+    width: 40px;
+    height: 40px;
+    margin-left: 500px;
+    margin-top: -350px;
+}
+
+
+
+/* Family list chiếm không gian còn lại */
+.family-list {
+    flex: 1 1 500px;
+    /* Thu gọn chiều rộng tối đa */
+    max-width: 500px;
+    padding: 20px 15px;
+    /* Giảm padding */
+    background: #f7fafc;
+    border-radius: 12px;
+    /* Giảm border-radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* --- Phần chọn miền và tìm kiếm --- */
+.list-choice {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 15px auto;
+    /* Giảm margin */
+    max-width: 300px;
+    /* Thu gọn chiều ngang */
+    text-align: center;
+    padding: 10px 12px;
+    /* Giảm padding */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-container,
+.region-choice-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* Giảm khoảng cách giữa label và input/select */
+    margin-bottom: 8px;
+    /* Khoảng cách giữa search và dropdown */
+}
+
+.search-label,
+.choice-region {
+    font-size: 14px;
+    /* Giảm font size */
+    font-weight: 600;
+    color: #1976D2;
+    margin: 0;
+    user-select: none;
+}
+
+.search-input,
+.region-select {
+    font-size: 14px;
+    /* Giảm font size */
+    padding: 6px 10px;
+    /* Giảm padding */
+    border: 2px solid #1976D2;
+    border-radius: 6px;
+    background-color: #E3F2FD;
+    color: #0D47A1;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: 180px;
+    /* Thu gọn chiều rộng */
+}
+
+.search-input {
+    cursor: text;
+}
+
+.search-input::placeholder {
+    color: #0D47A1;
+    opacity: 0.7;
+}
+
+.search-input:hover,
+.search-input:focus,
+.region-select:hover,
+.region-select:focus {
+    background-color: #BBDEFB;
+    border-color: #0D47A1;
+    outline: none;
+    box-shadow: 0 0 4px rgba(25, 118, 210, 0.7);
+}
+
+/* --- Thông tin hoàn cảnh khó khăn --- */
+.family-list h3 {
+    text-align: center;
+    color: #1976D2;
+    font-size: 1.5rem;
+    /* Giảm font size */
+    margin-bottom: 20px;
+    /* Giảm margin */
+    letter-spacing: 0.5px;
+}
+
+.family-card {
+    background: #fff;
+    border-radius: 10px;
+    /* Giảm border-radius */
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.06);
+    padding: 16px;
+    /* Giảm padding */
+    margin-bottom: 16px;
+    /* Giảm margin giữa các card */
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid #1976D2;
+    /* Giảm độ dày border-left */
+    overflow: hidden;
+    /* Đảm bảo nội dung không bị tràn */
+    word-wrap: break-word;
+    /* Đảm bảo văn bản xuống dòng đúng cách */
+}
+
+.family-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    /* Giảm hiệu ứng hover */
+    box-shadow: 0 6px 18px rgba(25, 118, 210, 0.14);
+}
+
+.family-card h4 {
+    margin: 0 0 8px 0;
+    /* Giảm margin */
+    color: #1976D2;
+    font-size: 1.1rem;
+    /* Giảm font size */
+    font-weight: 600;
+}
+
+.family-card p {
+    margin: 0;
+    color: #333;
+    font-size: 0.95rem;
+    /* Giảm font size */
+    line-height: 1.5;
+    /* Giảm line-height để gọn hơn */
+}
+
+.btn-detail {
+    display: inline-block;
+    margin-top: 8px;
+    /* Giảm margin */
+    background-color: #3498db;
+    color: white;
+    padding: 6px 10px;
+    /* Giảm padding */
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    /* Giảm font size */
+}
+
+.btn-detail:hover {
+    background-color: #2980b9;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    #map {
+        max-width: 100%;
+    }
+
+    .family-list {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .list-choice {
+        position: static;
+        margin: 15px auto;
+        max-width: 100%;
+        box-shadow: none;
+        padding: 8px 0;
+    }
+
+    .search-input,
+    .region-select {
+        width: 150px;
+        /* Thu gọn hơn nữa trên mobile */
+    }
+}
+
+@media (max-width: 600px) {
+
+    .list-choice {
+        padding-top: 270px;
+    }
+
+    .family-list {
+        padding: 10px;
+    }
+
+    .family-card {
+        padding: 12px;
+    }
+
+    .family-list h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+
+    .family-card h4 {
+        font-size: 1rem;
+    }
+
+    .family-card p {
+        font-size: 0.9rem;
+    }
+
+    .btn-detail {
+        font-size: 0.85rem;
+        padding: 5px 8px;
+    }
+
+    .search-container,
+    .region-choice-container {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .search-label,
+    .choice-region {
+        font-size: 13px;
+    }
+
+    .search-input,
+    .region-select {
+        width: 100%;
+        /* Chiếm toàn bộ chiều rộng trên mobile */
+        font-size: 13px;
+    }
+}
+
+/* --- Kiểu cho Form Đăng Bài Hỗ Trợ Mới --- */
+.admin-post-form-container {
+    flex: 1 1 500px;
+    /* Tương tự như family-list */
+    max-width: 500px;
+    /* Giới hạn chiều rộng */
+    padding: 20px 15px;
+    background: #f7fafc;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0 0 0;
+    /* Thêm margin top để tách biệt với phần chọn miền nếu family-list bị ẩn */
+    /* Nếu family-list vẫn hiển thị, bạn có thể điều chỉnh margin này hoặc đặt nó trong container riêng */
+}
+
+.admin-post-form-container h3 {
+    text-align: center;
+    color: #1976D2;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+.admin-post-form-container .form-group {
+    margin-bottom: 15px;
+    /* Khoảng cách giữa các nhóm trường */
+}
+
+.admin-post-form-container label {
+    display: block;
+    /* Label chiếm một dòng */
+    font-size: 14px;
+    font-weight: 600;
+    color: #1976D2;
+    margin-bottom: 5px;
+    /* Khoảng cách giữa label và input */
+    user-select: none;
+}
+
+.admin-post-form-container input[type="text"],
+.admin-post-form-container textarea,
+.admin-post-form-container select {
+    width: 100%;
+    /* Chiếm toàn bộ chiều rộng của container cha */
+    padding: 10px 12px;
+    /* Tăng padding cho dễ nhìn hơn */
+    font-size: 14px;
+    border: 2px solid #1976D2;
+    border-radius: 6px;
+    background-color: #E3F2FD;
+    color: #0D47A1;
+    box-sizing: border-box;
+    /* Đảm bảo padding và border không làm tăng kích thước tổng thể */
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.admin-post-form-container input[type="text"]::placeholder,
+.admin-post-form-container textarea::placeholder {
+    color: #0D47A1;
+    opacity: 0.7;
+}
+
+.admin-post-form-container input[type="text"]:hover,
+.admin-post-form-container input[type="text"]:focus,
+.admin-post-form-container textarea:hover,
+.admin-post-form-container textarea:focus,
+.admin-post-form-container select:hover,
+.admin-post-form-container select:focus {
+    background-color: #BBDEFB;
+    border-color: #0D47A1;
+    outline: none;
+    box-shadow: 0 0 4px rgba(25, 118, 210, 0.7);
+}
+
+.admin-post-form-container input[type="file"] {
+    font-size: 14px;
+    color: #0D47A1;
+    padding: 5px 0;
+    /* Điều chỉnh padding cho input file */
+}
+
+.admin-post-form-container .btn-submit-aid {
+    display: block;
+    /* Nút chiếm toàn bộ chiều rộng */
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    /* Tăng font size cho nút chính */
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+    /* Khoảng cách với trường cuối cùng */
+}
+
+.admin-post-form-container .btn-submit-aid:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+}
+
+.admin-post-form-container .btn-submit-aid:active {
+    transform: translateY(0);
+}
+
+/* Responsive cho form đăng bài */
+@media (max-width: 768px) {
+    .admin-post-form-container {
+        max-width: 100%;
+        margin-top: 20px;
+        /* Đảm bảo có khoảng cách khi family-list bị ẩn */
+    }
+}
+
+@media (max-width: 600px) {
+    .admin-post-form-container {
+        padding: 15px 10px;
+    }
+
+    .admin-post-form-container h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .admin-post-form-container label {
+        font-size: 13px;
+    }
+
+    .admin-post-form-container input[type="text"],
+    .admin-post-form-container textarea,
+    .admin-post-form-container select,
+    .admin-post-form-container input[type="file"] {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+
+    .admin-post-form-container .btn-submit-aid {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}
